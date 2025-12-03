@@ -16,6 +16,11 @@ const { title, description, image = '/og-image.png' } = Astro.props;
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <meta name="generator" content={Astro.generator} />
 
+<!-- Google Fonts - Lato (loaded via link for better performance) -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css?family=Lato:300,400,600,700" rel="stylesheet" />
+
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
 

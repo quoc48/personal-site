@@ -1,7 +1,6 @@
 @import "tailwindcss";
 
-/* Lato font from Google Fonts (v1 API for better initial render) */
-@import url('https://fonts.googleapis.com/css?family=Lato:300,400,600,700');
+/* Note: Lato font is loaded via <link> in BaseHead.astro for better compatibility */
 
 /* Custom CSS variables matching Figma design */
 @theme {
