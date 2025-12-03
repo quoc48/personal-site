@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
-/* Lato font from Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;600;700&display=swap');
+/* Lato font from Google Fonts (v1 API for better initial render) */
+@import url('https://fonts.googleapis.com/css?family=Lato:300,400,600,700');
 
 /* Custom CSS variables matching Figma design */
 @theme {
@@ -9,4 +9,11 @@
   --color-text-primary: #1E1E1E;
   --color-text-secondary: #757575;
   --color-bg: #FFFFFF;
+}
+
+/* Improved font rendering */
+html {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
