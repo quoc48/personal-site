@@ -1,0 +1,80 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map((project) => ({
+    params: { slug: project.id },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+---
+
+<BaseLayout
+  title={`${project.data.title} - Your Name`}
+  description={project.data.description}
+  image={project.data.thumbnail}
+>
+  <article class="max-w-4xl mx-auto px-6 py-24">
+    <!-- Back Link -->
+    <a
+      href="/work"
+      class="inline-flex items-center text-sm text-gray-500 hover:text-gray-900 transition-colors mb-8"
+    >
+      <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+      </svg>
+      Back to Work
+    </a>
+
+    <!-- Header -->
+    <header class="mb-12">
+      <h1 class="text-4xl font-bold text-gray-900">{project.data.title}</h1>
+      <p class="mt-4 text-xl text-gray-600">{project.data.description}</p>
+
+      {project.data.tags && project.data.tags.length > 0 && (
+        <div class="mt-6 flex flex-wrap gap-2">
+          {project.data.tags.map((tag: string) => (
+            <span class="inline-flex items-center rounded-full bg-gray-100 px-3 py-1 text-sm font-medium text-gray-600">
+              {tag}
+            </span>
+          ))}
+        </div>
+      )}
+    </header>
+
+    <!-- Featured Image -->
+    <div class="aspect-video overflow-hidden rounded-lg bg-gray-100 mb-12">
+      <img
+        src={project.data.thumbnail}
+        alt={project.data.title}
+        class="h-full w-full object-cover"
+      />
+    </div>
+
+    <!-- Content -->
+    <div class="prose prose-gray max-w-none prose-headings:font-semibold prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline">
+      <Content />
+    </div>
+
+    <!-- Future: Video Player Section -->
+    {project.data.video && (
+      <div class="mt-12">
+        <!-- Video player will be added here -->
+        <p class="text-gray-500 text-center">Video player placeholder</p>
+      </div>
+    )}
+
+    <!-- Future: Before/After Image Slider -->
+    {project.data.beforeAfterImages && (
+      <div class="mt-12">
+        <!-- Image comparison slider will be added here -->
+        <p class="text-gray-500 text-center">Image comparison slider placeholder</p>
+      </div>
+    )}
+  </article>
+</BaseLayout>
