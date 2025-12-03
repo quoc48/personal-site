@@ -1,63 +1,31 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { getCollection } from 'astro:content';
-import ProjectCard from '../components/ProjectCard.astro';
-
-const featuredProjects = await getCollection('projects', ({ data }) => data.featured);
 ---
 
 <BaseLayout
-  title="Your Name - Portfolio"
-  description="Welcome to my portfolio. I'm a designer/developer passionate about creating beautiful digital experiences."
+  title="Quoc Phan - Product Designer"
+  description="Product designer passionate about building things. Experience in fintech, CRM, case management, and bioinformatics platforms."
 >
-  <!-- Hero Section -->
-  <section class="max-w-4xl mx-auto px-6 py-24">
-    <h1 class="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
-      Hi, I'm <span class="text-blue-600">Your Name</span>
-    </h1>
-    <p class="mt-6 text-xl text-gray-600 max-w-2xl leading-relaxed">
-      A brief introduction about yourself. What you do, what you're passionate about,
-      and what makes you unique. Keep it concise and engaging.
+  <!-- Content Section -->
+  <section class="flex-1 flex flex-col items-center justify-center gap-6 px-[50px] py-[202px]">
+    <!-- Paragraph 1: Intro - Medium 24px, line-height 1.2 -->
+    <p class="w-full max-w-[924px] font-lato font-medium text-2xl text-[#1E1E1E] leading-[1.2em]">
+      Hey, My name is Quoc Phan, I'm a product designer and love building things.
     </p>
-    <div class="mt-8 flex gap-4">
-      <a
-        href="/work"
-        class="inline-flex items-center px-6 py-3 bg-gray-900 text-white text-sm font-medium rounded-lg hover:bg-gray-800 transition-colors"
-      >
-        View My Work
-      </a>
-      <a
-        href="/contact"
-        class="inline-flex items-center px-6 py-3 border border-gray-300 text-gray-700 text-sm font-medium rounded-lg hover:border-gray-400 transition-colors"
-      >
-        Get in Touch
-      </a>
-    </div>
-  </section>
 
-  <!-- Featured Projects Section -->
-  {featuredProjects.length > 0 && (
-    <section class="max-w-4xl mx-auto px-6 py-16">
-      <h2 class="text-2xl font-bold text-gray-900 mb-8">Featured Work</h2>
-      <div class="grid gap-8 md:grid-cols-2">
-        {featuredProjects.map((project) => (
-          <ProjectCard
-            title={project.data.title}
-            description={project.data.description}
-            thumbnail={project.data.thumbnail}
-            slug={project.id}
-            tags={project.data.tags}
-          />
-        ))}
-      </div>
-      <div class="mt-8 text-center">
-        <a
-          href="/work"
-          class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors"
-        >
-          View all projects &rarr;
-        </a>
-      </div>
-    </section>
-  )}
+    <!-- Paragraph 2: Experience - Medium 24px, line-height 1.5 -->
+    <p class="w-full max-w-[924px] font-lato font-medium text-2xl text-[#1E1E1E] leading-[1.5em]">
+      I've spent the last three years to work on projects in a wide range from fintech including customer relationship management, case management to bioinformatics platforms.
+    </p>
+
+    <!-- Paragraph 3: Skills - Light 20px, line-height 1.5 -->
+    <p class="w-full max-w-[924px] font-lato font-light text-xl text-[#1E1E1E] leading-[1.5em]">
+      I'm already familiar with regulatory constraints and edge cases, and I know how to balance technical, business and a smooth user experience for this type of product.
+    </p>
+
+    <!-- Paragraph 4: CTA - Medium 24px, line-height 1.2 -->
+    <p class="w-full max-w-[924px] font-lato font-medium text-2xl text-[#1E1E1E] leading-[1.2em]">
+      Feel free to contract me!
+    </p>
+  </section>
 </BaseLayout>
