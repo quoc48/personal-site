@@ -8,14 +8,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 >
   <!-- Content Section - responsive height, vertically centered -->
   <section class="flex-1 flex flex-col items-center justify-center gap-6 px-[50px]">
-    <!-- Paragraph 1: 28px Light, "Quoc Phan" Semi-bold -->
+    <!-- Paragraph 1: 28px Light, "Quoc Phan" Regular (400) -->
     <p class="w-full max-w-[924px] font-lato font-light text-[28px] text-[#1E1E1E] leading-normal">
-      Hey! My name is <span class="font-semibold">Quoc Phan,</span> product designer and love building things.
+      Hey! My name is <span class="font-normal">Quoc Phan,</span> product designer and love building things.
     </p>
 
-    <!-- Paragraph 2: 20px Light, "projects" Regular + link -->
+    <!-- Paragraph 2: 20px Light, "projects" with subtle underline -->
     <p class="w-full max-w-[924px] font-lato font-light text-xl text-[#1E1E1E] leading-[1.5em]">
-      I've spent the last three years to work on <a href="/work" class="font-normal underline">projects</a> in a wide range from fintech including customer relationship management, case management to bioinformatics platforms.
+      I've spent the last three years to work on <a href="/work" class="font-normal underline decoration-1 underline-offset-4 hover:decoration-2 transition-all">projects</a> in a wide range from fintech including customer relationship management, case management to bioinformatics platforms.
     </p>
 
     <!-- Paragraph 3: 20px Light -->
@@ -23,9 +23,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       I'm already familiar with regulatory constraints and edge cases, and I know how to balance technical, business and a smooth user experience for this type of product.
     </p>
 
-    <!-- Paragraph 4: 20px Light, "contact" Regular + link -->
+    <!-- Paragraph 4: 20px Light, "contact" with subtle underline -->
     <p class="w-full max-w-[924px] font-lato font-light text-xl text-[#1E1E1E] leading-[1.2em]">
-      Feel free to <a href="/contact" class="font-normal underline">contact</a> me!
+      Feel free to <a href="/contact" class="font-normal underline decoration-1 underline-offset-4 hover:decoration-2 transition-all">contact</a> me!
     </p>
   </section>
 </BaseLayout>
