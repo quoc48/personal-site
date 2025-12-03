@@ -6,26 +6,26 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   title="Quoc Phan - Product Designer"
   description="Product designer passionate about building things. Experience in fintech, CRM, case management, and bioinformatics platforms."
 >
-  <!-- Content Section - flex-1 fills available space, no fixed vertical padding -->
+  <!-- Content Section - responsive height, vertically centered -->
   <section class="flex-1 flex flex-col items-center justify-center gap-6 px-[50px]">
-    <!-- Paragraph 1: Intro - Medium 24px, line-height 1.2 -->
-    <p class="w-full max-w-[924px] font-lato font-medium text-2xl text-[#1E1E1E] leading-[1.2em]">
-      Hey, My name is <span class="font-bold">Quoc Phan</span>, I'm a product designer and love building things.
+    <!-- Paragraph 1: 24px Light, "Quoc Phan" Semi-bold -->
+    <p class="w-full max-w-[924px] font-lato font-light text-2xl text-[#1E1E1E] leading-[1.2em]">
+      Hey, My name is <span class="font-semibold">Quoc Phan</span>, I'm a product designer and love building things.
     </p>
 
-    <!-- Paragraph 2: Experience - Medium 24px, line-height 1.5 -->
-    <p class="w-full max-w-[924px] font-lato font-medium text-2xl text-[#1E1E1E] leading-[1.5em]">
-      I've spent the last three years to work on projects in a wide range from fintech including customer relationship management, case management to bioinformatics platforms.
+    <!-- Paragraph 2: 20px Light, "projects" Regular + link -->
+    <p class="w-full max-w-[924px] font-lato font-light text-xl text-[#1E1E1E] leading-[1.5em]">
+      I've spent the last three years to work on <a href="/work" class="font-normal underline">projects</a> in a wide range from fintech including customer relationship management, case management to bioinformatics platforms.
     </p>
 
-    <!-- Paragraph 3: Skills - Light 20px, line-height 1.5 -->
+    <!-- Paragraph 3: 20px Light -->
     <p class="w-full max-w-[924px] font-lato font-light text-xl text-[#1E1E1E] leading-[1.5em]">
       I'm already familiar with regulatory constraints and edge cases, and I know how to balance technical, business and a smooth user experience for this type of product.
     </p>
 
-    <!-- Paragraph 4: CTA - Medium 24px, line-height 1.2 -->
-    <p class="w-full max-w-[924px] font-lato font-medium text-2xl text-[#1E1E1E] leading-[1.2em]">
-      Feel free to contact me!
+    <!-- Paragraph 4: 20px Light, "contact" Regular + link -->
+    <p class="w-full max-w-[924px] font-lato font-light text-xl text-[#1E1E1E] leading-[1.2em]">
+      Feel free to <a href="/contact" class="font-normal underline">contact</a> me!
     </p>
   </section>
 </BaseLayout>
