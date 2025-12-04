@@ -135,8 +135,9 @@ const { enabled = true } = Astro.props;
     camera.position.z = -1.3;
     scene.add(camera);
 
-    // Create group (like reference)
+    // Create group (like reference) - positioned at 1/3 from bottom
     const group = new THREE.Group();
+    group.position.y = -0.35; // Move flower down to lower third of viewport
     scene.add(group);
 
     // Mouse tracking variables (exact same as reference)
