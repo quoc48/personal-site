@@ -7,13 +7,13 @@ import BackToTop from '../../components/BackToTop.astro';
   title="Expense Tracker - Quoc Phan"
   description="Building my own expense tracking app with Flutter, Supabase, and AI - because existing apps weren't quite right for me."
 >
-  <section class="flex flex-col gap-12 px-[50px] py-8">
-    <div class="flex flex-col gap-8 items-center w-full">
+  <section class="flex flex-col gap-8 md:gap-12 px-5 md:px-[50px] py-6 md:py-8">
+    <div class="flex flex-col gap-6 md:gap-8 items-center w-full">
       <!-- Back Button -->
       <div class="w-full max-w-[800px]">
         <a
           href="/work"
-          class="inline-flex items-center gap-2 font-lato font-normal text-base text-[#2c2c2c] hover:opacity-70 transition-opacity"
+          class="inline-flex items-center gap-2 font-lato font-normal text-sm md:text-base text-[#2c2c2c] hover:opacity-70 transition-opacity"
         >
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -23,13 +23,13 @@ import BackToTop from '../../components/BackToTop.astro';
       </div>
 
       <!-- Title -->
-      <h1 class="font-lato font-normal text-[28px] text-[#2c2c2c] leading-normal w-full max-w-[800px]">
+      <h1 class="font-lato font-normal text-2xl md:text-[28px] text-[#2c2c2c] leading-normal w-full max-w-[800px]">
         Building My Own Expense Tracker
       </h1>
 
       <!-- Content -->
       <div class="flex flex-col gap-6 w-full max-w-[800px]">
-        <div class="font-lato font-normal text-[18px] text-[#2c2c2c] leading-[1.5] space-y-4">
+        <div class="font-lato font-normal text-base md:text-[18px] text-[#2c2c2c] leading-[1.5] space-y-4">
           <p>
             For more than two years, I used Notion (and a few other apps) to track my daily expenses. It worked, but barely. Every time I wanted to log something, I had to open the app, navigate to the right database, create a new entry, fill in multiple fields... you get the idea. Too many steps for something I do several times a day.
           </p>
@@ -39,7 +39,7 @@ import BackToTop from '../../components/BackToTop.astro';
           </p>
         </div>
 
-        <div class="font-lato font-normal text-[18px] text-[#2c2c2c] leading-[1.5] space-y-4">
+        <div class="font-lato font-normal text-base md:text-[18px] text-[#2c2c2c] leading-[1.5] space-y-4">
           <h2 class="font-bold">The MVP Features</h2>
           <p>
             I started simple. The first version focuses on just a few things that matter most to me:
@@ -52,7 +52,7 @@ import BackToTop from '../../components/BackToTop.astro';
           </ul>
         </div>
 
-        <div class="font-lato font-normal text-[18px] text-[#2c2c2c] leading-[1.5] space-y-4">
+        <div class="font-lato font-normal text-base md:text-[18px] text-[#2c2c2c] leading-[1.5] space-y-4">
           <h2 class="font-bold">A Simple Tech Stack</h2>
           <p>
             I kept the technology deliberately simple:
@@ -67,7 +67,7 @@ import BackToTop from '../../components/BackToTop.astro';
           </p>
         </div>
 
-        <div class="font-lato font-normal text-[18px] text-[#2c2c2c] leading-[1.5] space-y-4">
+        <div class="font-lato font-normal text-base md:text-[18px] text-[#2c2c2c] leading-[1.5] space-y-4">
           <h2 class="font-bold">Design First, Then Code</h2>
           <p>
             My process was straightforward: design everything in Figma first, then implement. What made it interesting was connecting Figma directly to Claude Code through MCP (Model Context Protocol). This let me reference my designs while coding, and the results matched my mockups almost perfectly.
@@ -77,7 +77,7 @@ import BackToTop from '../../components/BackToTop.astro';
           </p>
         </div>
 
-        <div class="font-lato font-normal text-[18px] text-[#2c2c2c] leading-[1.5] space-y-4">
+        <div class="font-lato font-normal text-base md:text-[18px] text-[#2c2c2c] leading-[1.5] space-y-4">
           <h2 class="font-bold">What's Next</h2>
           <p>
             There's still a lot I want to add: advanced reports with better visualizations, voice input for quick logging, maybe some smart insights about spending habits. The beauty of building your own tool is that you can shape it exactly how you want, at your own pace.

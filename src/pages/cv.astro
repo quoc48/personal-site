@@ -9,13 +9,13 @@ const downloadPath = '/Quoc-CV.pdf';
   title="My CV - Quoc Phan"
   description="View and download Quoc Phan's CV - Product Designer with expertise in enterprise applications."
 >
-  <section class="flex flex-col gap-6 px-[50px] py-8">
-    <!-- Download Button -->
-    <div class="flex justify-end w-full">
+  <section class="flex flex-col gap-6 px-5 md:px-[50px] py-6 md:py-8">
+    <!-- Download Button - More prominent on mobile -->
+    <div class="flex flex-col md:flex-row md:justify-end w-full gap-3">
       <a
         href={downloadPath}
         download="Quoc-Phan-CV.pdf"
-        class="inline-flex items-center gap-2 px-5 py-2.5 bg-[#2c2c2c] text-white font-lato font-medium text-base rounded-lg hover:bg-[#1a1a1a] transition-colors"
+        class="inline-flex items-center justify-center gap-2 px-5 py-3 md:py-2.5 bg-[#2c2c2c] text-white font-lato font-medium text-base rounded-lg hover:bg-[#1a1a1a] transition-colors"
       >
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M21 15V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -24,13 +24,18 @@ const downloadPath = '/Quoc-CV.pdf';
         </svg>
         Download My CV
       </a>
+      
+      <!-- Mobile hint -->
+      <p class="md:hidden text-sm text-[#757575] font-lato text-center">
+        For the best viewing experience, download the PDF
+      </p>
     </div>
 
-    <!-- PDF Viewer - Full width, responsive height using A4 aspect ratio -->
+    <!-- PDF Viewer - Responsive height, smaller on mobile -->
     <div class="w-full">
       <iframe
         src={pdfPath}
-        class="w-full rounded-lg border border-gray-200"
+        class="w-full rounded-lg border border-gray-200 min-h-[400px] md:min-h-0"
         style="aspect-ratio: 210 / 280;"
         title="Quoc Phan's CV"
       ></iframe>

@@ -32,13 +32,13 @@ const otherProjects = [
   title={`${project.title} - Quoc Phan`}
   description="Designing a customer intelligence platform for government law enforcement agencies."
 >
-  <section class="flex flex-col gap-12 px-[50px] py-8">
-    <div class="flex flex-col gap-8 items-center w-full">
+  <section class="flex flex-col gap-8 md:gap-12 px-5 md:px-[50px] py-6 md:py-8">
+    <div class="flex flex-col gap-6 md:gap-8 items-center w-full">
       <!-- Back Button -->
       <div class="w-full max-w-[800px]">
         <a
           href="/work"
-          class="inline-flex items-center gap-2 font-lato font-normal text-base text-[#2c2c2c] hover:opacity-70 transition-opacity"
+          class="inline-flex items-center gap-2 font-lato font-normal text-sm md:text-base text-[#2c2c2c] hover:opacity-70 transition-opacity"
         >
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -48,16 +48,16 @@ const otherProjects = [
       </div>
 
       <!-- Project Title -->
-      <h1 class="font-lato font-normal text-[28px] text-[#2c2c2c] leading-normal w-full max-w-[800px]">
+      <h1 class="font-lato font-normal text-2xl md:text-[28px] text-[#2c2c2c] leading-normal w-full max-w-[800px]">
         {project.title}
       </h1>
 
       <!-- The Challenge -->
       <div class="flex flex-col gap-2 w-full max-w-[800px]">
-        <h2 class="font-lato font-bold text-[18px] text-[#2c2c2c] leading-[1.5]">
+        <h2 class="font-lato font-bold text-base md:text-[18px] text-[#2c2c2c] leading-[1.5]">
           The Challenge
         </h2>
-        <div class="font-lato font-normal text-[18px] text-[#2c2c2c] leading-[1.5] space-y-3">
+        <div class="font-lato font-normal text-base md:text-[18px] text-[#2c2c2c] leading-[1.5] space-y-3">
           <p>
             The opportunity to design a critical tool for government law enforcement from the ground up is rare. Tapestrii 10Q is a customer intelligence platform that streamlines investigations by consolidating case, document, and artifact management into a single interface. When the project moved from concept to build, I stepped into a leadership role to guide the design team through this complex challenge.
           </p>
@@ -74,10 +74,10 @@ const otherProjects = [
 
       <!-- My Role -->
       <div class="flex flex-col gap-2 w-full max-w-[800px]">
-        <h2 class="font-lato font-bold text-[18px] text-[#2c2c2c] leading-[1.5]">
+        <h2 class="font-lato font-bold text-base md:text-[18px] text-[#2c2c2c] leading-[1.5]">
           My Role
         </h2>
-        <div class="font-lato font-normal text-[18px] text-[#2c2c2c] leading-[1.5] space-y-3">
+        <div class="font-lato font-normal text-base md:text-[18px] text-[#2c2c2c] leading-[1.5] space-y-3">
           <p>
             My role on this project was twofold, allowing me to both steer the strategic vision and contribute to hands-on execution:
           </p>
@@ -93,7 +93,7 @@ const otherProjects = [
 
       <!-- Video Section -->
       <div class="flex flex-col gap-3 w-full max-w-[800px]">
-        <p class="font-lato font-normal text-[18px] text-[#2c2c2c] leading-[1.5]">
+        <p class="font-lato font-normal text-base md:text-[18px] text-[#2c2c2c] leading-[1.5]">
           <span class="font-bold">Watch the full case study</span> to see how we designed the Global-Federated Search—the intelligence-gathering engine at the heart of the platform:
         </p>
         <VideoPlayer
@@ -104,7 +104,7 @@ const otherProjects = [
 
       <!-- Image Slider Section -->
       <div class="flex flex-col gap-3 w-full max-w-[800px]">
-        <p class="font-lato font-normal text-[18px] text-[#2c2c2c] leading-[1.5]">
+        <p class="font-lato font-normal text-base md:text-[18px] text-[#2c2c2c] leading-[1.5]">
           <span class="font-bold">Browse the UI mockups</span> to explore the key screens and workflows:
         </p>
         <ImageSlider
@@ -115,10 +115,10 @@ const otherProjects = [
 
       <!-- The Outcome -->
       <div class="flex flex-col gap-2 w-full max-w-[800px]">
-        <h2 class="font-lato font-bold text-[18px] text-[#2c2c2c] leading-[1.5]">
+        <h2 class="font-lato font-bold text-base md:text-[18px] text-[#2c2c2c] leading-[1.5]">
           The Outcome
         </h2>
-        <div class="font-lato font-normal text-[18px] text-[#2c2c2c] leading-[1.5] space-y-3">
+        <div class="font-lato font-normal text-base md:text-[18px] text-[#2c2c2c] leading-[1.5] space-y-3">
           <p>
             Designing a complex, large-scale product for a government client was an invaluable experience. The project served as a real-world masterclass in navigating technical constraints, fostering team alignment, and delivering a high-stakes digital tool.
           </p>
@@ -134,17 +134,17 @@ const otherProjects = [
 
     <!-- Other Projects Section -->
     <div class="flex flex-col gap-4 w-full max-w-[800px] mx-auto">
-      <h2 class="font-lato font-light text-[28px] text-[#2c2c2c] leading-normal">
+      <h2 class="font-lato font-light text-2xl md:text-[28px] text-[#2c2c2c] leading-normal">
         Other projects
       </h2>
-      <div class="flex gap-1">
+      <div class="grid grid-cols-2 md:flex gap-1">
         {otherProjects.map((proj) => (
           <a
             href={`/work/${proj.slug}`}
-            class="flex items-center justify-center overflow-hidden size-[200px] px-3 hover:opacity-90 transition-opacity"
+            class="flex items-center justify-center overflow-hidden aspect-square md:size-[200px] px-3 hover:opacity-90 transition-opacity"
             style={`background-color: ${proj.bgColor}`}
           >
-            <p class="font-lato font-normal text-2xl text-[#f5f5f5] text-center w-full">
+            <p class="font-lato font-normal text-xl md:text-2xl text-[#f5f5f5] text-center w-full">
               {proj.name}
             </p>
           </a>

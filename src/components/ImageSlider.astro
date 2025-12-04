@@ -19,10 +19,10 @@ const aspectRatioClasses = {
 
 <div class={`image-slider relative bg-black ${className}`} data-aspect-ratio={aspectRatio}>
   <!-- Main Images Container -->
-  <div class={`slider-track relative w-full overflow-hidden ${aspectRatio !== 'auto' ? aspectRatioClasses[aspectRatio] : 'min-h-[300px]'}`}>
+  <div class={`slider-track relative w-full overflow-hidden ${aspectRatio !== 'auto' ? aspectRatioClasses[aspectRatio] : 'min-h-[250px] md:min-h-[300px]'}`}>
     {images.map((image, index) => (
       <div
-        class={`slide absolute inset-0 flex items-center justify-center p-4 transition-opacity duration-300 ${index === 0 ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+        class={`slide absolute inset-0 flex items-center justify-center p-2 md:p-4 transition-opacity duration-300 ${index === 0 ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
         data-index={index}
       >
         <img
@@ -36,7 +36,7 @@ const aspectRatioClasses = {
 
     <!-- Fullscreen Toggle Button -->
     <button
-      class="fullscreen-btn absolute top-3 right-3 w-8 h-8 bg-black/50 hover:bg-black/70 rounded flex items-center justify-center transition-colors z-10 focus:outline-none"
+      class="fullscreen-btn absolute top-2 md:top-3 right-2 md:right-3 w-8 h-8 bg-black/50 hover:bg-black/70 rounded flex items-center justify-center transition-colors z-10 focus:outline-none"
       aria-label="Toggle fullscreen"
     >
       <!-- Expand Icon (arrows pointing outward) -->
@@ -51,40 +51,40 @@ const aspectRatioClasses = {
   </div>
 
   <!-- Navigation Arrows -->
-  <div class="arrows-container absolute inset-x-0 top-0 bottom-[64px] flex items-center justify-between px-3 pointer-events-none">
+  <div class="arrows-container absolute inset-x-0 top-0 bottom-[56px] md:bottom-[64px] flex items-center justify-between px-2 md:px-3 pointer-events-none">
     <!-- Left Arrow -->
     <button
-      class="arrow-left pointer-events-auto w-[40px] h-[40px] bg-black/60 hover:bg-black/80 backdrop-blur-sm rounded-full flex items-center justify-center transition-colors focus:outline-none shadow-lg"
+      class="arrow-left pointer-events-auto w-[36px] h-[36px] md:w-[40px] md:h-[40px] bg-black/60 hover:bg-black/80 backdrop-blur-sm rounded-full flex items-center justify-center transition-colors focus:outline-none shadow-lg"
       aria-label="Previous slide"
     >
-      <svg width="16" height="16" viewBox="0 0 12 12" fill="none">
+      <svg width="14" height="14" class="md:w-4 md:h-4" viewBox="0 0 12 12" fill="none">
         <path d="M8 2L4 6L8 10" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     </button>
 
     <!-- Right Arrow -->
     <button
-      class="arrow-right pointer-events-auto w-[40px] h-[40px] bg-black/60 hover:bg-black/80 backdrop-blur-sm rounded-full flex items-center justify-center transition-colors focus:outline-none shadow-lg"
+      class="arrow-right pointer-events-auto w-[36px] h-[36px] md:w-[40px] md:h-[40px] bg-black/60 hover:bg-black/80 backdrop-blur-sm rounded-full flex items-center justify-center transition-colors focus:outline-none shadow-lg"
       aria-label="Next slide"
     >
-      <svg width="16" height="16" viewBox="0 0 12 12" fill="none">
+      <svg width="14" height="14" class="md:w-4 md:h-4" viewBox="0 0 12 12" fill="none">
         <path d="M4 2L8 6L4 10" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     </button>
   </div>
 
   <!-- Thumbnail Strip -->
-  <div class="thumbnails-container flex items-center justify-center gap-2 py-3 bg-black">
+  <div class="thumbnails-container flex items-center justify-start md:justify-center gap-1.5 md:gap-2 py-2 md:py-3 px-2 md:px-0 bg-black overflow-x-auto scrollbar-hide">
     {images.map((image, index) => (
       <button
-        class={`thumbnail relative overflow-hidden rounded transition-all cursor-pointer focus:outline-none ${index === 0 ? 'ring-2 ring-[#3d5af1] opacity-100' : 'opacity-50 hover:opacity-75'}`}
+        class={`thumbnail relative overflow-hidden rounded transition-all cursor-pointer focus:outline-none flex-shrink-0 ${index === 0 ? 'ring-2 ring-[#3d5af1] opacity-100' : 'opacity-50 hover:opacity-75'}`}
         data-index={index}
         aria-label={`Go to slide ${index + 1}`}
       >
         <img
           src={image}
           alt={alts[index] || `Thumbnail ${index + 1}`}
-          class="w-16 h-10 object-cover"
+          class="w-12 h-8 md:w-16 md:h-10 object-cover"
         />
       </button>
     ))}
@@ -92,6 +92,15 @@ const aspectRatioClasses = {
 </div>
 
 <style>
+  /* Hide scrollbar but allow scrolling */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
   /* Fullscreen mode */
   .image-slider.fullscreen {
     position: fixed !important;
@@ -150,8 +159,11 @@ const aspectRatioClasses = {
             const containerWidth = sliderTrack.offsetWidth - 32; // Account for padding
             let calculatedHeight = containerWidth / aspectRatio;
 
-            // Clamp height between 300px and 600px for reasonable display
-            calculatedHeight = Math.max(300, Math.min(600, calculatedHeight));
+            // Clamp height between 250px and 500px on mobile, 300px and 600px on desktop
+            const isMobile = window.innerWidth < 768;
+            const minHeight = isMobile ? 250 : 300;
+            const maxHeight = isMobile ? 450 : 600;
+            calculatedHeight = Math.max(minHeight, Math.min(maxHeight, calculatedHeight));
 
             sliderTrack.style.height = `${calculatedHeight}px`;
             sliderTrack.style.minHeight = 'unset';
@@ -201,6 +213,12 @@ const aspectRatioClasses = {
           }
         });
 
+        // Scroll thumbnail into view on mobile
+        const activeThumb = thumbnails[index] as HTMLElement;
+        if (activeThumb) {
+          activeThumb.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        }
+
         currentIndex = index;
       };
 
@@ -212,6 +230,27 @@ const aspectRatioClasses = {
       thumbnails.forEach((thumb, index) => {
         thumb.addEventListener('click', () => showSlide(index));
       });
+
+      // Touch swipe support
+      let touchStartX = 0;
+      let touchEndX = 0;
+
+      sliderTrack?.addEventListener('touchstart', (e) => {
+        touchStartX = (e as TouchEvent).changedTouches[0].screenX;
+      }, { passive: true });
+
+      sliderTrack?.addEventListener('touchend', (e) => {
+        touchEndX = (e as TouchEvent).changedTouches[0].screenX;
+        const swipeThreshold = 50;
+        
+        if (touchStartX - touchEndX > swipeThreshold) {
+          // Swiped left, go to next
+          showSlide(currentIndex + 1);
+        } else if (touchEndX - touchStartX > swipeThreshold) {
+          // Swiped right, go to previous
+          showSlide(currentIndex - 1);
+        }
+      }, { passive: true });
 
       // Fullscreen toggle
       fullscreenBtn?.addEventListener('click', () => {

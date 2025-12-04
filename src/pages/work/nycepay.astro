@@ -53,13 +53,13 @@ const otherProjects = [
   title={`${project.title} - Quoc Phan`}
   description="Redesigning a legacy government payment platform for the City of New York."
 >
-  <section class="flex flex-col gap-12 px-[50px] py-8">
-    <div class="flex flex-col gap-8 items-center w-full">
+  <section class="flex flex-col gap-8 md:gap-12 px-5 md:px-[50px] py-6 md:py-8">
+    <div class="flex flex-col gap-6 md:gap-8 items-center w-full">
       <!-- Back Button -->
       <div class="w-full max-w-[800px]">
         <a
           href="/work"
-          class="inline-flex items-center gap-2 font-lato font-normal text-base text-[#2c2c2c] hover:opacity-70 transition-opacity"
+          class="inline-flex items-center gap-2 font-lato font-normal text-sm md:text-base text-[#2c2c2c] hover:opacity-70 transition-opacity"
         >
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -69,16 +69,16 @@ const otherProjects = [
       </div>
 
       <!-- Project Title -->
-      <h1 class="font-lato font-normal text-[28px] text-[#2c2c2c] leading-normal w-full max-w-[800px]">
+      <h1 class="font-lato font-normal text-2xl md:text-[28px] text-[#2c2c2c] leading-normal w-full max-w-[800px]">
         {project.title}
       </h1>
 
       <!-- The Challenge -->
       <div class="flex flex-col gap-2 w-full max-w-[800px]">
-        <h2 class="font-lato font-bold text-[18px] text-[#2c2c2c] leading-[1.5]">
+        <h2 class="font-lato font-bold text-base md:text-[18px] text-[#2c2c2c] leading-[1.5]">
           The Challenge
         </h2>
-        <div class="font-lato font-normal text-[18px] text-[#2c2c2c] leading-[1.5] space-y-3">
+        <div class="font-lato font-normal text-base md:text-[18px] text-[#2c2c2c] leading-[1.5] space-y-3">
           <p>
             Redesigning legacy government systems is a formidable challenge, but one that offers immense value. These platforms serve millions of citizens, and improving their usability has a direct impact on public life. Aperia proactively developed and pitched a comprehensive redesign of the NYCePay platform—a critical service used for paying property taxes, fines, and other city fees.
           </p>
@@ -96,10 +96,10 @@ const otherProjects = [
 
       <!-- My Role -->
       <div class="flex flex-col gap-2 w-full max-w-[800px]">
-        <h2 class="font-lato font-bold text-[18px] text-[#2c2c2c] leading-[1.5]">
+        <h2 class="font-lato font-bold text-base md:text-[18px] text-[#2c2c2c] leading-[1.5]">
           My Role
         </h2>
-        <div class="font-lato font-normal text-[18px] text-[#2c2c2c] leading-[1.5] space-y-3">
+        <div class="font-lato font-normal text-base md:text-[18px] text-[#2c2c2c] leading-[1.5] space-y-3">
           <p>
             As the <span class="font-medium">sole UI/UX designer</span> on this initiative, I was entrusted with the end-to-end user experience and visual design. I worked in a lean, agile team alongside two business analysts to define problems, conceptualize solutions, and deliver high-fidelity designs—all within a <span class="font-medium">one-month timeline</span>.
           </p>
@@ -111,7 +111,7 @@ const otherProjects = [
 
       <!-- Video Section -->
       <div class="flex flex-col gap-3 w-full max-w-[800px]">
-        <p class="font-lato font-normal text-[18px] text-[#2c2c2c] leading-[1.5]">
+        <p class="font-lato font-normal text-base md:text-[18px] text-[#2c2c2c] leading-[1.5]">
           <span class="font-bold">Watch the full case study</span> to see the redesign strategy and key improvements:
         </p>
         <VideoPlayer
@@ -121,14 +121,14 @@ const otherProjects = [
       </div>
 
       <!-- Before/After Comparisons -->
-      <div class="flex flex-col gap-8 w-full max-w-[800px]">
-        <p class="font-lato font-normal text-[18px] text-[#2c2c2c] leading-[1.5]">
+      <div class="flex flex-col gap-6 md:gap-8 w-full max-w-[800px]">
+        <p class="font-lato font-normal text-base md:text-[18px] text-[#2c2c2c] leading-[1.5]">
           <span class="font-bold">Drag to compare</span> the before and after designs for each key improvement:
         </p>
 
         {comparisons.map((comp, index) => (
-          <div class="flex flex-col gap-4">
-            <h3 class="font-lato font-bold text-[18px] text-[#2c2c2c] leading-[1.5]">
+          <div class="flex flex-col gap-3 md:gap-4">
+            <h3 class="font-lato font-bold text-base md:text-[18px] text-[#2c2c2c] leading-[1.5]">
               {index + 1}. {comp.title}
             </h3>
             <BeforeAfterSlider
@@ -137,7 +137,7 @@ const otherProjects = [
               beforeAlt={`${comp.title} - Before`}
               afterAlt={`${comp.title} - After`}
             />
-            <p class="font-lato font-normal text-[18px] text-[#2c2c2c] leading-[1.5] mt-1">
+            <p class="font-lato font-normal text-base md:text-[18px] text-[#2c2c2c] leading-[1.5] mt-1">
               {comp.description}
             </p>
           </div>
@@ -146,10 +146,10 @@ const otherProjects = [
 
       <!-- The Outcome -->
       <div class="flex flex-col gap-2 w-full max-w-[800px]">
-        <h2 class="font-lato font-bold text-[18px] text-[#2c2c2c] leading-[1.5]">
+        <h2 class="font-lato font-bold text-base md:text-[18px] text-[#2c2c2c] leading-[1.5]">
           The Outcome
         </h2>
-        <div class="font-lato font-normal text-[18px] text-[#2c2c2c] leading-[1.5] space-y-3">
+        <div class="font-lato font-normal text-base md:text-[18px] text-[#2c2c2c] leading-[1.5] space-y-3">
           <p>
             While our proposal demonstrated significant improvements in usability and clarity, it wasn't awarded the contract. Despite this outcome, the project was an invaluable learning experience that sharpened my approach to complex system redesigns.
           </p>
@@ -165,17 +165,17 @@ const otherProjects = [
 
     <!-- Other Projects Section -->
     <div class="flex flex-col gap-4 w-full max-w-[800px] mx-auto">
-      <h2 class="font-lato font-light text-[28px] text-[#2c2c2c] leading-normal">
+      <h2 class="font-lato font-light text-2xl md:text-[28px] text-[#2c2c2c] leading-normal">
         Other projects
       </h2>
-      <div class="flex gap-1">
+      <div class="grid grid-cols-2 md:flex gap-1">
         {otherProjects.map((proj) => (
           <a
             href={`/work/${proj.slug}`}
-            class="flex items-center justify-center overflow-hidden size-[200px] px-3 hover:opacity-90 transition-opacity"
+            class="flex items-center justify-center overflow-hidden aspect-square md:size-[200px] px-3 hover:opacity-90 transition-opacity"
             style={`background-color: ${proj.bgColor}`}
           >
-            <p class="font-lato font-normal text-2xl text-[#f5f5f5] text-center w-full">
+            <p class="font-lato font-normal text-xl md:text-2xl text-[#f5f5f5] text-center w-full">
               {proj.name}
             </p>
           </a>
