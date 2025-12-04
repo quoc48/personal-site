@@ -1,7 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-const pdfPath = '/Quoc-CV.pdf#toolbar=1&navpanes=0&view=FitH';
+// PDF parameters: show toolbar, fit width, start at page 1
+const pdfPath = '/Quoc-CV.pdf#toolbar=1&navpanes=0&scrollbar=1&view=FitH&zoom=page-width';
 const downloadPath = '/Quoc-CV.pdf';
 ---
 
@@ -31,14 +32,41 @@ const downloadPath = '/Quoc-CV.pdf';
       </p>
     </div>
 
-    <!-- PDF Viewer - Responsive height, smaller on mobile -->
+    <!-- PDF Viewer -->
     <div class="w-full">
+      <!-- Mobile: Use Google Docs Viewer for better compatibility -->
       <iframe
-        src={pdfPath}
-        class="w-full rounded-lg border border-gray-200 min-h-[400px] md:min-h-0"
-        style="aspect-ratio: 210 / 280;"
+        id="pdf-viewer"
+        class="w-full rounded-lg border border-gray-200"
+        style="height: 70vh; min-height: 500px;"
         title="Quoc Phan's CV"
       ></iframe>
     </div>
   </section>
 </BaseLayout>
+
+<script>
+  function initPdfViewer() {
+    const iframe = document.getElementById('pdf-viewer') as HTMLIFrameElement;
+    if (!iframe) return;
+    
+    const pdfUrl = '/Quoc-CV.pdf';
+    const isMobile = window.innerWidth < 768;
+    
+    if (isMobile) {
+      // On mobile, use Google Docs Viewer for better rendering
+      const fullUrl = window.location.origin + pdfUrl;
+      iframe.src = `https://docs.google.com/viewer?url=${encodeURIComponent(fullUrl)}&embedded=true`;
+    } else {
+      // On desktop, use native PDF viewer with toolbar
+      iframe.src = pdfUrl + '#toolbar=1&navpanes=0&view=FitH';
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', initPdfViewer);
+  document.addEventListener('astro:page-load', initPdfViewer);
+  
+  if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    setTimeout(initPdfViewer, 0);
+  }
+</script>

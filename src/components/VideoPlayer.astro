@@ -8,30 +8,31 @@ interface Props {
 const { src, poster, class: className = '' } = Astro.props;
 ---
 
-<div class={`video-player relative bg-black w-full aspect-video overflow-hidden ${className}`}>
+<div class={`video-player relative bg-black w-full aspect-video overflow-hidden rounded-lg ${className}`}>
   <video
     class="video-element w-full h-full object-contain"
     poster={poster}
     preload="metadata"
     playsinline
+    webkit-playsinline
     src={src}
   >
     Your browser does not support the video tag.
   </video>
 
   <!-- Play Button Overlay (shown when paused) -->
-  <button class="play-overlay absolute inset-0 flex items-center justify-center bg-black/40 transition-opacity cursor-pointer">
-    <div class="w-20 h-20 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center hover:bg-white/30 hover:scale-110 transition-all">
-      <svg class="w-10 h-10 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+  <div class="play-overlay absolute inset-0 flex items-center justify-center bg-black/40 transition-opacity cursor-pointer">
+    <div class="play-btn w-16 h-16 md:w-20 md:h-20 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center hover:bg-white/30 hover:scale-110 transition-all active:scale-95">
+      <svg class="w-8 h-8 md:w-10 md:h-10 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
         <path d="M8 5v14l11-7z"/>
       </svg>
     </div>
-  </button>
+  </div>
 
   <!-- Controls Bar -->
-  <div class="video-controls absolute bottom-0 left-0 right-0 px-4 pb-4 pt-12 bg-gradient-to-t from-black/80 to-transparent opacity-0 transition-opacity duration-300">
+  <div class="video-controls absolute bottom-0 left-0 right-0 px-3 md:px-4 pb-3 md:pb-4 pt-10 md:pt-12 bg-gradient-to-t from-black/80 to-transparent opacity-0 transition-opacity duration-300">
     <!-- Timeline -->
-    <div class="timeline-container relative h-1 bg-white/30 rounded-full mb-4 cursor-pointer group">
+    <div class="timeline-container relative h-1 bg-white/30 rounded-full mb-3 md:mb-4 cursor-pointer group">
       <div class="timeline-progress h-full bg-white rounded-full transition-all" style="width: 0%"></div>
       <div class="timeline-knob absolute top-1/2 -translate-y-1/2 w-3 h-3 bg-white rounded-full shadow-lg scale-0 group-hover:scale-100 transition-transform" style="left: 0%"></div>
     </div>
@@ -39,26 +40,26 @@ const { src, poster, class: className = '' } = Astro.props;
     <!-- Control Buttons -->
     <div class="flex items-center justify-between">
       <!-- Left Controls -->
-      <div class="flex items-center gap-3">
+      <div class="flex items-center gap-2 md:gap-3">
         <!-- Play/Pause Button -->
-        <button class="play-pause-btn w-10 h-10 flex items-center justify-center rounded-full hover:bg-white/20 transition-colors">
-          <svg class="play-icon w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+        <button class="play-pause-btn w-8 h-8 md:w-10 md:h-10 flex items-center justify-center rounded-full hover:bg-white/20 transition-colors">
+          <svg class="play-icon w-5 h-5 md:w-6 md:h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
             <path d="M8 5v14l11-7z"/>
           </svg>
-          <svg class="pause-icon w-6 h-6 text-white hidden" fill="currentColor" viewBox="0 0 24 24">
+          <svg class="pause-icon w-5 h-5 md:w-6 md:h-6 text-white hidden" fill="currentColor" viewBox="0 0 24 24">
             <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
           </svg>
         </button>
 
         <!-- Time Display -->
-        <span class="time-display text-white text-sm font-mono">0:00 / 0:00</span>
+        <span class="time-display text-white text-xs md:text-sm font-mono">0:00 / 0:00</span>
       </div>
 
       <!-- Right Controls -->
       <div class="flex items-center gap-2">
         <!-- Fullscreen -->
-        <button class="fullscreen-btn w-10 h-10 flex items-center justify-center rounded-full hover:bg-white/20 transition-colors">
-          <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+        <button class="fullscreen-btn w-8 h-8 md:w-10 md:h-10 flex items-center justify-center rounded-full hover:bg-white/20 transition-colors">
+          <svg class="w-4 h-4 md:w-5 md:h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
             <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
           </svg>
         </button>
@@ -68,7 +69,8 @@ const { src, poster, class: className = '' } = Astro.props;
 </div>
 
 <style>
-  .video-player:hover .video-controls {
+  .video-player:hover .video-controls,
+  .video-player.show-controls .video-controls {
     opacity: 1;
   }
 
@@ -94,6 +96,7 @@ const { src, poster, class: className = '' } = Astro.props;
     width: 100vw !important;
     height: 100vh !important;
     aspect-ratio: auto !important;
+    border-radius: 0 !important;
   }
 
   .video-player.fullscreen .video-controls {
@@ -111,7 +114,8 @@ const { src, poster, class: className = '' } = Astro.props;
       player.setAttribute('data-initialized', 'true');
 
       const video = player.querySelector('.video-element') as HTMLVideoElement;
-      const playOverlay = player.querySelector('.play-overlay') as HTMLButtonElement;
+      const playOverlay = player.querySelector('.play-overlay') as HTMLDivElement;
+      const playBtn = player.querySelector('.play-btn') as HTMLDivElement;
       const playPauseBtn = player.querySelector('.play-pause-btn') as HTMLButtonElement;
       const timeDisplay = player.querySelector('.time-display') as HTMLSpanElement;
       const timelineProgress = player.querySelector('.timeline-progress') as HTMLDivElement;
@@ -138,19 +142,47 @@ const { src, poster, class: className = '' } = Astro.props;
         }
       };
 
-      // Click handlers
-      playOverlay?.addEventListener('click', (e) => {
+      // Play overlay - handle both click and touch
+      const handlePlayOverlay = (e: Event) => {
         e.preventDefault();
+        e.stopPropagation();
         togglePlay();
-      });
+      };
 
-      // Click on video to pause/play
+      playOverlay?.addEventListener('click', handlePlayOverlay);
+      playOverlay?.addEventListener('touchend', handlePlayOverlay);
+
+      // Play button specifically (for better touch target)
+      playBtn?.addEventListener('click', handlePlayOverlay);
+      playBtn?.addEventListener('touchend', handlePlayOverlay);
+
+      // Click/tap on video to pause/play (when playing)
       video.addEventListener('click', (e) => {
         e.preventDefault();
+        if (!video.paused) {
+          togglePlay();
+          // Show controls briefly on tap
+          player.classList.add('show-controls');
+          setTimeout(() => player.classList.remove('show-controls'), 3000);
+        }
+      });
+
+      video.addEventListener('touchend', (e) => {
+        if (!video.paused) {
+          e.preventDefault();
+          togglePlay();
+          player.classList.add('show-controls');
+          setTimeout(() => player.classList.remove('show-controls'), 3000);
+        }
+      });
+
+      // Play/Pause button in controls
+      playPauseBtn?.addEventListener('click', (e) => {
+        e.preventDefault();
         togglePlay();
       });
 
-      playPauseBtn?.addEventListener('click', (e) => {
+      playPauseBtn?.addEventListener('touchend', (e) => {
         e.preventDefault();
         togglePlay();
       });
@@ -177,11 +209,21 @@ const { src, poster, class: className = '' } = Astro.props;
         player.classList.remove('playing');
       });
 
-      // Seek on timeline click
-      timelineContainer?.addEventListener('click', (e) => {
+      // Seek on timeline click/touch
+      const handleTimelineSeek = (clientX: number) => {
         const rect = timelineContainer.getBoundingClientRect();
-        const percent = (e.clientX - rect.left) / rect.width;
-        video.currentTime = percent * video.duration;
+        const percent = (clientX - rect.left) / rect.width;
+        video.currentTime = Math.max(0, Math.min(1, percent)) * video.duration;
+      };
+
+      timelineContainer?.addEventListener('click', (e) => {
+        handleTimelineSeek(e.clientX);
+      });
+
+      timelineContainer?.addEventListener('touchend', (e) => {
+        if (e.changedTouches.length > 0) {
+          handleTimelineSeek(e.changedTouches[0].clientX);
+        }
       });
 
       // Fullscreen toggle function
@@ -201,8 +243,12 @@ const { src, poster, class: className = '' } = Astro.props;
         }
       };
 
-      // Fullscreen button (in controls bar at bottom-right)
+      // Fullscreen button
       fullscreenBtn?.addEventListener('click', toggleFullscreen);
+      fullscreenBtn?.addEventListener('touchend', (e) => {
+        e.preventDefault();
+        toggleFullscreen();
+      });
 
       // Handle ESC key to exit fullscreen
       document.addEventListener('keydown', (e) => {
@@ -216,6 +262,15 @@ const { src, poster, class: className = '' } = Astro.props;
         if (!document.fullscreenElement && player.classList.contains('fullscreen')) {
           player.classList.remove('fullscreen');
         }
+      });
+
+      // Show controls on touch/interaction
+      player.addEventListener('touchstart', () => {
+        player.classList.add('show-controls');
+      });
+
+      player.addEventListener('touchend', () => {
+        setTimeout(() => player.classList.remove('show-controls'), 3000);
       });
     });
   }
