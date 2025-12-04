@@ -26,12 +26,12 @@ const downloadPath = '/Quoc-CV.pdf';
       </a>
     </div>
 
-    <!-- PDF Viewer - Full width, fixed height matching PDF -->
+    <!-- PDF Viewer - Full width, responsive height using A4 aspect ratio -->
     <div class="w-full">
       <iframe
         src={pdfPath}
         class="w-full rounded-lg border border-gray-200"
-        style="height: 1350px;"
+        style="aspect-ratio: 210 / 280;"
         title="Quoc Phan's CV"
       ></iframe>
     </div>
