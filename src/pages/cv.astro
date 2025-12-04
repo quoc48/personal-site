@@ -41,12 +41,12 @@ const downloadPath = '/Quoc-CV.pdf';
         title="Quoc Phan's CV"
       ></iframe>
       
-      <!-- Desktop: Native PDF with aspect ratio -->
+      <!-- Desktop: Native PDF with reasonable height -->
       <iframe
         id="pdf-viewer-desktop"
         src={`${pdfPath}#toolbar=1&navpanes=0&view=FitH`}
         class="hidden md:block w-full rounded-lg border border-gray-200"
-        style="aspect-ratio: 210 / 297;"
+        style="aspect-ratio: 210 / 260;"
         title="Quoc Phan's CV"
       ></iframe>
     </div>
