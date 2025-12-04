@@ -1,0 +1,137 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import VideoPlayer from '../../components/VideoPlayer.astro';
+import ImageSlider from '../../components/ImageSlider.astro';
+
+// Project data
+const project = {
+  title: 'Card Debit Servicing Platform',
+  video: {
+    src: '/projects/crm/Card_Servicing_Case_Study.mp4',
+    poster: '',
+  },
+  images: [
+    '/projects/crm/slides/1.png',
+    '/projects/crm/slides/2.png',
+    '/projects/crm/slides/3.png',
+    '/projects/crm/slides/4.png',
+    '/projects/crm/slides/5.png',
+    '/projects/crm/slides/6.png',
+  ],
+};
+
+// Other projects (excluding current)
+const otherProjects = [
+  { name: 'Government', bgColor: '#1472e0', slug: 'government' },
+  { name: 'NYCePay', bgColor: '#2c2c2c', slug: 'nycepay' },
+  { name: 'Talk2Data', bgColor: '#18c1a8', slug: 'talk2data' },
+];
+---
+
+<BaseLayout
+  title={`${project.title} - Quoc Phan`}
+  description="A state-of-the-art CRM solution for transforming debit card services."
+>
+  <section class="flex flex-col gap-12 px-[50px] py-8">
+    <div class="flex flex-col gap-8 items-center w-full">
+      <!-- Back Button -->
+      <div class="w-full max-w-[800px]">
+        <a
+          href="/work"
+          class="inline-flex items-center gap-2 font-lato font-normal text-base text-[#2c2c2c] hover:opacity-70 transition-opacity"
+        >
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Back to Work
+        </a>
+      </div>
+
+      <!-- Project Title -->
+      <h1 class="font-lato font-normal text-[28px] text-[#2c2c2c] leading-normal w-full max-w-[800px]">
+        {project.title}
+      </h1>
+
+      <!-- The Challenge -->
+      <div class="flex flex-col gap-2 w-full max-w-[800px]">
+        <h2 class="font-lato font-bold text-[18px] text-[#2c2c2c] leading-[1.5]">
+          The Challenge
+        </h2>
+        <p class="font-lato font-normal text-base text-[#2c2c2c] leading-[1.5]">
+          Fiserv's call center agents were juggling multiple disconnected systems just to help a single cardholder—longer calls, more errors, frustrated customers. They needed a partner to untangle this mess and build a unified platform from scratch. Aperia got the call, and I was fortunate to be part of the team tackling this challenge.
+        </p>
+      </div>
+
+      <!-- My Role -->
+      <div class="flex flex-col gap-2 w-full max-w-[800px]">
+        <h2 class="font-lato font-bold text-[18px] text-[#2c2c2c] leading-[1.5]">
+          My Role
+        </h2>
+        <div class="font-lato font-normal text-base text-[#2c2c2c] leading-[1.5] space-y-3">
+          <p>
+            This engagement spanned from 2019 to 2023, growing from a single phase into a multi-phase program as trust was built. My role evolved along the way:
+          </p>
+          <ul class="list-disc list-inside space-y-1 pl-1">
+            <li><span class="font-medium">Phase 1 (2019–2022):</span> Dedicated UI/UX Designer — translated business requirements into wireframes, designed end-to-end workflows, and worked closely with developers through implementation.</li>
+            <li><span class="font-medium">Phase 2–3 (2022–2023):</span> Lead Designer — shifted from hands-on execution to mentoring other designers and ensuring quality across the program.</li>
+          </ul>
+          <p>
+            My work ranged from mapping complex service workflows (caller authentication, fraud cases, dispute resolution) to designing a resilient experience that handled API errors gracefully—because in the real world, things break, and agents still need to help customers.
+          </p>
+        </div>
+      </div>
+
+      <!-- Video Section -->
+      <div class="flex flex-col gap-3 w-full max-w-[800px]">
+        <p class="font-lato font-normal text-base text-[#2c2c2c] leading-[1.5]">
+          <span class="font-bold">Watch the full case study</span> to see how we transformed fragmented tools into a single-view dashboard:
+        </p>
+        <VideoPlayer
+          src={project.video.src}
+          poster={project.video.poster}
+        />
+      </div>
+
+      <!-- Image Slider Section -->
+      <div class="flex flex-col gap-3 w-full max-w-[800px]">
+        <p class="font-lato font-normal text-base text-[#2c2c2c] leading-[1.5]">
+          <span class="font-bold">Browse the UI mockups</span> to explore the key screens and workflows:
+        </p>
+        <ImageSlider
+          images={project.images}
+          alts={['Slide 1', 'Slide 2', 'Slide 3', 'Slide 4', 'Slide 5', 'Slide 6']}
+        />
+      </div>
+
+      <!-- The Outcome -->
+      <div class="flex flex-col gap-2 w-full max-w-[800px]">
+        <h2 class="font-lato font-bold text-[18px] text-[#2c2c2c] leading-[1.5]">
+          The Outcome
+        </h2>
+        <p class="font-lato font-normal text-base text-[#2c2c2c] leading-[1.5]">
+          What started as a single-phase engagement turned into a long-term partnership. The initial delivery earned enough trust for Fiserv to renew the contract multiple times—a pretty clear sign I was doing something right. Beyond the business impact, I'm proud to have contributed to a platform that actually makes agents' jobs easier every day. It's the kind of project that reminds you why design matters.
+        </p>
+      </div>
+    </div>
+
+    <!-- Other Projects Section -->
+    <div class="flex flex-col gap-4 w-full max-w-[800px] mx-auto">
+      <h2 class="font-lato font-light text-[28px] text-[#2c2c2c] leading-normal">
+        Other projects
+      </h2>
+      <div class="flex gap-1">
+        {otherProjects.map((proj) => (
+          <a
+            href={`/work/${proj.slug}`}
+            class="flex items-center justify-center overflow-hidden size-[200px] px-3 hover:opacity-90 transition-opacity"
+            style={`background-color: ${proj.bgColor}`}
+          >
+            <p class="font-lato font-normal text-2xl text-[#f5f5f5] text-center w-full">
+              {proj.name}
+            </p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

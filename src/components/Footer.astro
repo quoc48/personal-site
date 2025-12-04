@@ -1,15 +1,32 @@
 ---
 const currentYear = new Date().getFullYear();
+
+const socialLinks = [
+  { href: 'https://linkedin.com/in/quocphan', icon: '/linkedin-icon.svg', label: 'LinkedIn' },
+  { href: 'https://github.com/quocphan', icon: '/github-icon.svg', label: 'GitHub' },
+];
 ---
 
 <footer class="w-full">
   <div class="max-w-[1024px] mx-auto px-[50px] py-[50px] flex justify-center">
     <div class="flex flex-col items-center gap-4">
       <!-- Social Icons -->
-      <img src="/social-icons.svg" alt="Social media links" class="h-6" />
+      <div class="flex items-center gap-4">
+        {socialLinks.map((link) => (
+          <a
+            href={link.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hover:opacity-70 transition-opacity"
+            aria-label={link.label}
+          >
+            <img src={link.icon} alt={link.label} class="size-6" />
+          </a>
+        ))}
+      </div>
 
       <!-- Copyright -->
-      <p class="font-lato font-light text-base text-[#1E1E1E]">
+      <p class="font-lato font-light text-base text-black">
         {currentYear} Quoc Phan
       </p>
     </div>

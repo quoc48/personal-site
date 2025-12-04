@@ -1,0 +1,227 @@
+---
+interface Props {
+  images: string[];
+  alts?: string[];
+  class?: string;
+}
+
+const { images = [], alts = [], class: className = '' } = Astro.props;
+---
+
+<div class={`image-slider relative bg-black ${className}`}>
+  <!-- Main Images Container -->
+  <div class="slider-track relative w-full h-[468px] overflow-hidden">
+    {images.map((image, index) => (
+      <div
+        class={`slide absolute inset-0 flex items-start justify-center p-4 pt-6 transition-opacity duration-300 ${index === 0 ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+        data-index={index}
+      >
+        <img
+          src={image}
+          alt={alts[index] || `Slide ${index + 1}`}
+          class="slide-image max-w-full max-h-full w-auto h-auto object-contain object-top"
+        />
+      </div>
+    ))}
+
+    <!-- Fullscreen Toggle Button -->
+    <button
+      class="fullscreen-btn absolute top-6 right-3 w-8 h-8 bg-black/50 hover:bg-black/70 rounded flex items-center justify-center transition-colors z-10 focus:outline-none"
+      aria-label="Toggle fullscreen"
+    >
+      <!-- Expand Icon (arrows pointing outward) -->
+      <svg class="expand-icon w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4h4M4 4l5 5M20 8V4h-4M20 4l-5 5M4 16v4h4M4 20l5-5M20 16v4h-4M20 20l-5-5"/>
+      </svg>
+      <!-- Minimize Icon (arrows pointing inward) - hidden by default -->
+      <svg class="minimize-icon w-5 h-5 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 4v4H5M9 8L4 3M15 4v4h4M15 8l5-5M9 20v-4H5M9 16l-5 5M15 20v-4h4M15 16l5 5"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Navigation Arrows -->
+  <div class="arrows-container absolute inset-x-0 top-1/2 -translate-y-1/2 flex justify-between px-3 pointer-events-none" style="top: calc(50% - 40px);">
+    <!-- Left Arrow -->
+    <button
+      class="arrow-left pointer-events-auto w-[40px] h-[40px] bg-black/60 hover:bg-black/80 backdrop-blur-sm rounded-full flex items-center justify-center transition-colors focus:outline-none shadow-lg"
+      aria-label="Previous slide"
+    >
+      <svg width="16" height="16" viewBox="0 0 12 12" fill="none">
+        <path d="M8 2L4 6L8 10" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+
+    <!-- Right Arrow -->
+    <button
+      class="arrow-right pointer-events-auto w-[40px] h-[40px] bg-black/60 hover:bg-black/80 backdrop-blur-sm rounded-full flex items-center justify-center transition-colors focus:outline-none shadow-lg"
+      aria-label="Next slide"
+    >
+      <svg width="16" height="16" viewBox="0 0 12 12" fill="none">
+        <path d="M4 2L8 6L4 10" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Thumbnail Strip -->
+  <div class="thumbnails-container flex items-center justify-center gap-2 py-3 bg-black">
+    {images.map((image, index) => (
+      <button
+        class={`thumbnail relative overflow-hidden rounded transition-all cursor-pointer focus:outline-none ${index === 0 ? 'ring-2 ring-[#3d5af1] opacity-100' : 'opacity-50 hover:opacity-75'}`}
+        data-index={index}
+        aria-label={`Go to slide ${index + 1}`}
+      >
+        <img
+          src={image}
+          alt={alts[index] || `Thumbnail ${index + 1}`}
+          class="w-16 h-10 object-cover"
+        />
+      </button>
+    ))}
+  </div>
+</div>
+
+<style>
+  /* Fullscreen mode */
+  .image-slider.fullscreen {
+    position: fixed !important;
+    inset: 0 !important;
+    z-index: 9999 !important;
+    max-width: none !important;
+    width: 100vw !important;
+    height: 100vh !important;
+  }
+
+  .image-slider.fullscreen .slider-track {
+    height: calc(100vh - 80px) !important;
+  }
+
+  /* Ensure consistent top alignment in fullscreen */
+  .image-slider.fullscreen .slide {
+    padding-top: 32px !important;
+  }
+
+  .image-slider.fullscreen .expand-icon {
+    display: none;
+  }
+
+  .image-slider.fullscreen .minimize-icon {
+    display: block;
+  }
+</style>
+
+<script>
+  function initImageSliders() {
+    const sliders = document.querySelectorAll('.image-slider');
+
+    sliders.forEach((slider) => {
+      // Skip if already initialized
+      if (slider.getAttribute('data-initialized')) return;
+      slider.setAttribute('data-initialized', 'true');
+
+      const slides = slider.querySelectorAll('.slide');
+      const thumbnails = slider.querySelectorAll('.thumbnail');
+      const arrowLeft = slider.querySelector('.arrow-left');
+      const arrowRight = slider.querySelector('.arrow-right');
+      const fullscreenBtn = slider.querySelector('.fullscreen-btn');
+
+      if (slides.length === 0) return;
+
+      let currentIndex = 0;
+
+      const showSlide = (index: number) => {
+        // Wrap around
+        if (index < 0) index = slides.length - 1;
+        if (index >= slides.length) index = 0;
+
+        // Update slides
+        slides.forEach((slide, i) => {
+          if (i === index) {
+            slide.classList.remove('opacity-0', 'pointer-events-none');
+            slide.classList.add('opacity-100');
+          } else {
+            slide.classList.add('opacity-0', 'pointer-events-none');
+            slide.classList.remove('opacity-100');
+          }
+        });
+
+        // Update thumbnails
+        thumbnails.forEach((thumb, i) => {
+          if (i === index) {
+            thumb.classList.remove('opacity-50');
+            thumb.classList.add('ring-2', 'ring-[#3d5af1]', 'opacity-100');
+          } else {
+            thumb.classList.add('opacity-50');
+            thumb.classList.remove('ring-2', 'ring-[#3d5af1]', 'opacity-100');
+          }
+        });
+
+        currentIndex = index;
+      };
+
+      // Arrow navigation
+      arrowLeft?.addEventListener('click', () => showSlide(currentIndex - 1));
+      arrowRight?.addEventListener('click', () => showSlide(currentIndex + 1));
+
+      // Thumbnail navigation
+      thumbnails.forEach((thumb, index) => {
+        thumb.addEventListener('click', () => showSlide(index));
+      });
+
+      // Fullscreen toggle
+      fullscreenBtn?.addEventListener('click', () => {
+        slider.classList.toggle('fullscreen');
+
+        // If entering fullscreen, also use native fullscreen API
+        if (slider.classList.contains('fullscreen')) {
+          if (document.fullscreenElement) {
+            // Already in fullscreen, do nothing extra
+          } else if (slider.requestFullscreen) {
+            slider.requestFullscreen().catch(() => {
+              // Fallback to CSS-only fullscreen if API fails
+            });
+          }
+        } else {
+          if (document.fullscreenElement) {
+            document.exitFullscreen();
+          }
+        }
+      });
+
+      // Handle keyboard navigation
+      document.addEventListener('keydown', (e) => {
+        // ESC to exit fullscreen
+        if (e.key === 'Escape' && slider.classList.contains('fullscreen')) {
+          slider.classList.remove('fullscreen');
+        }
+
+        // Arrow keys for navigation (only in fullscreen mode)
+        if (slider.classList.contains('fullscreen')) {
+          if (e.key === 'ArrowLeft') {
+            e.preventDefault();
+            showSlide(currentIndex - 1);
+          } else if (e.key === 'ArrowRight') {
+            e.preventDefault();
+            showSlide(currentIndex + 1);
+          }
+        }
+      });
+
+      // Sync with native fullscreen exit
+      document.addEventListener('fullscreenchange', () => {
+        if (!document.fullscreenElement && slider.classList.contains('fullscreen')) {
+          slider.classList.remove('fullscreen');
+        }
+      });
+    });
+  }
+
+  // Initialize on page load
+  document.addEventListener('DOMContentLoaded', initImageSliders);
+  document.addEventListener('astro:page-load', initImageSliders);
+
+  // Also run immediately in case DOM is already ready
+  if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    setTimeout(initImageSliders, 0);
+  }
+</script>

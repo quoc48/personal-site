@@ -22,10 +22,10 @@ const currentPath = Astro.url.pathname;
           <a
             href={link.href}
             class:list={[
-              'font-lato font-light text-xl text-[#1E1E1E] transition-opacity hover:opacity-70',
-              currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href))
-                ? 'opacity-100'
-                : 'opacity-100'
+              'font-lato text-xl text-[#1E1E1E] transition-opacity hover:opacity-70',
+              currentPath === link.href || currentPath === link.href + '/'
+                ? 'font-medium'
+                : 'font-light'
             ]}
           >
             {link.label}

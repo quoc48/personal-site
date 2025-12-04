@@ -1,41 +1,128 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getCollection } from 'astro:content';
-import ProjectCard from '../../components/ProjectCard.astro';
 
-const projects = await getCollection('projects');
-const sortedProjects = projects.sort(
-  (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
-);
+// Company data
+const companies = [
+  { name: 'Aperia', logo: '/aperia-logo.svg', bgColor: '#002f67', url: 'https://aperia.com/' },
+  { name: 'BioTuring', logo: '/bioturing-logo.png', bgColor: '#f5f5f5', url: 'https://bioturing.com/' },
+];
+
+// Project data
+const projects = [
+  { name: 'CRM', bgColor: '#f34213', slug: 'crm' },
+  { name: 'Government', bgColor: '#1472e0', slug: 'government' },
+  { name: 'NYCePay', bgColor: '#2c2c2c', slug: 'nycepay' },
+  { name: 'Talk2Data', bgColor: '#18c1a8', slug: 'talk2data' },
+];
+
+// Experiments data
+const experiments = [
+  { name: 'Claude Code', bgColor: '#c66240' },
+  { name: 'Expenses\nTracker', bgColor: '#5a5a5a' },
+  { name: 'LLM Engineers Handbook', bgColor: '#5a5a5a' },
+];
+
+// Knowledge areas
+const knowledge = [
+  'UI/UX in Fintech',
+  'Design System',
+  'Vibe Coding',
+  'AI/ML Foundation',
+];
 ---
 
 <BaseLayout
-  title="Work - Your Name"
-  description="Explore my portfolio of projects, including design and development work."
+  title="Work - Quoc Phan"
+  description="Explore my portfolio of projects in fintech, CRM, case management, and bioinformatics platforms."
 >
-  <section class="max-w-4xl mx-auto px-6 py-24">
-    <h1 class="text-4xl font-bold text-gray-900">Work</h1>
-    <p class="mt-4 text-lg text-gray-600 max-w-2xl">
-      A collection of projects I've worked on. Each project represents my passion
-      for creating thoughtful, user-centered designs and solutions.
-    </p>
-
-    <div class="mt-12 grid gap-8 md:grid-cols-2">
-      {sortedProjects.map((project) => (
-        <ProjectCard
-          title={project.data.title}
-          description={project.data.description}
-          thumbnail={project.data.thumbnail}
-          slug={project.id}
-          tags={project.data.tags}
-        />
-      ))}
+  <section class="flex flex-col gap-12 px-[50px] py-8">
+    <!-- Section 1: Places I've worked -->
+    <div class="flex flex-col gap-4">
+      <h2 class="font-lato font-light text-[28px] text-[#2c2c2c] leading-normal">
+        Places I've worked.
+      </h2>
+      <div class="flex gap-1">
+        {companies.map((company) => (
+          <a
+            href={company.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex items-center justify-center overflow-hidden size-[200px] hover:opacity-90 transition-opacity"
+            style={`background-color: ${company.bgColor}`}
+          >
+            {company.name === 'Aperia' ? (
+              <img
+                src={company.logo}
+                alt={company.name}
+                class="w-[108px] h-[32px]"
+              />
+            ) : (
+              <img
+                src={company.logo}
+                alt={company.name}
+                class="w-[146px] h-[61px] object-contain"
+              />
+            )}
+          </a>
+        ))}
+      </div>
     </div>
 
-    {sortedProjects.length === 0 && (
-      <p class="mt-12 text-gray-500 text-center">
-        No projects yet. Check back soon!
-      </p>
-    )}
+    <!-- Section 2: Projects I've built -->
+    <div class="flex flex-col gap-4">
+      <h2 class="font-lato font-light text-[28px] text-[#2c2c2c] leading-normal">
+        Few projects I've built for company.
+      </h2>
+      <div class="flex gap-1">
+        {projects.map((project) => (
+          <a
+            href={`/work/${project.slug}`}
+            class="flex items-center justify-center overflow-hidden size-[200px] px-3 hover:opacity-90 transition-opacity"
+            style={`background-color: ${project.bgColor}`}
+          >
+            <p class="font-lato font-normal text-2xl text-[#f5f5f5] text-center w-full">
+              {project.name}
+            </p>
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <!-- Section 3: Experiments -->
+    <div class="flex flex-col gap-4">
+      <h2 class="font-lato font-light text-[28px] text-[#2c2c2c] leading-normal">
+        Things I'm experimenting on.
+      </h2>
+      <div class="flex gap-1">
+        {experiments.map((exp) => (
+          <div
+            class="flex items-center justify-center overflow-hidden size-[200px] px-3"
+            style={`background-color: ${exp.bgColor}`}
+          >
+            <p class="font-lato font-normal text-2xl text-[#f5f5f5] text-center w-full leading-[1.5] whitespace-pre-line">
+              {exp.name}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Section 4: Knowledge -->
+    <div class="flex flex-col gap-4">
+      <h2 class="font-lato font-light text-[28px] text-[#2c2c2c] leading-normal">
+        Knowledges I gain.
+      </h2>
+      <div class="flex gap-1 w-full">
+        {knowledge.map((item) => (
+          <div
+            class="flex-1 flex items-center justify-center overflow-hidden bg-[#5a5a5a] p-4"
+          >
+            <p class="font-lato font-normal text-xl text-[#f5f5f5] text-center w-full leading-[1.5]">
+              {item}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
   </section>
 </BaseLayout>
