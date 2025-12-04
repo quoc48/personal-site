@@ -1,0 +1,185 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import VideoPlayer from '../../components/VideoPlayer.astro';
+import BeforeAfterSlider from '../../components/BeforeAfterSlider.astro';
+
+// Project data
+const project = {
+  title: 'Redesigning NYCePay',
+  video: {
+    src: '/projects/nycepay/NYCePay_Redesign_Study.mp4',
+    poster: '',
+  },
+};
+
+// Before/After comparisons
+const comparisons = [
+  {
+    title: 'Create Account Page',
+    before: '/projects/nycepay/slides/1.2.png',
+    after: '/projects/nycepay/slides/1.1.png',
+    description: 'The original registration was a wall of fields that overwhelmed new users. I restructured it into a guided, multi-step flow with logical groupings, inline help text, and a progress indicator—turning a frustrating first impression into a confident onboarding experience.',
+  },
+  {
+    title: 'Account Info Page',
+    before: '/projects/nycepay/slides/2.1.png',
+    after: '/projects/nycepay/slides/2.2.png',
+    description: 'Users landed on a cluttered dashboard with no clear hierarchy. The redesign introduces a clean "account snapshot" that highlights what matters most—outstanding balances, recent activity, and quick actions—while tucking secondary details into an accessible slide-out panel.',
+  },
+  {
+    title: 'Property Tax Bill Info',
+    before: '/projects/nycepay/slides/3.1.png',
+    after: '/projects/nycepay/slides/3.2.png',
+    description: 'Understanding a tax bill shouldn\'t require switching between screens. I added contextual slide-outs so users can reference bill details while initiating payment, plus clear status badges (pending, paid, overdue) that eliminate guesswork at a glance.',
+  },
+  {
+    title: 'Search Page',
+    before: '/projects/nycepay/slides/4.1.png',
+    after: '/projects/nycepay/slides/4.2.png',
+    description: 'Three separate search tools meant users had to think before they could search. I unified them into a single, smart search bar that accepts multiple parameters and remembers recent queries—making it faster to find records and reducing cognitive overhead.',
+  },
+];
+
+// Other projects (excluding current)
+const otherProjects = [
+  { name: 'CRM', bgColor: '#f34213', slug: 'crm' },
+  { name: 'Government', bgColor: '#1472e0', slug: 'government' },
+  { name: 'Talk2Data', bgColor: '#18c1a8', slug: 'talk2data' },
+];
+---
+
+<BaseLayout
+  title={`${project.title} - Quoc Phan`}
+  description="Redesigning a legacy government payment platform for the City of New York."
+>
+  <section class="flex flex-col gap-12 px-[50px] py-8">
+    <div class="flex flex-col gap-8 items-center w-full">
+      <!-- Back Button -->
+      <div class="w-full max-w-[800px]">
+        <a
+          href="/work"
+          class="inline-flex items-center gap-2 font-lato font-normal text-base text-[#2c2c2c] hover:opacity-70 transition-opacity"
+        >
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Back to Work
+        </a>
+      </div>
+
+      <!-- Project Title -->
+      <h1 class="font-lato font-normal text-[28px] text-[#2c2c2c] leading-normal w-full max-w-[800px]">
+        {project.title}
+      </h1>
+
+      <!-- The Challenge -->
+      <div class="flex flex-col gap-2 w-full max-w-[800px]">
+        <h2 class="font-lato font-bold text-[18px] text-[#2c2c2c] leading-[1.5]">
+          The Challenge
+        </h2>
+        <div class="font-lato font-normal text-[18px] text-[#2c2c2c] leading-[1.5] space-y-3">
+          <p>
+            Redesigning legacy government systems is a formidable challenge, but one that offers immense value. These platforms serve millions of citizens, and improving their usability has a direct impact on public life. Aperia proactively developed and pitched a comprehensive redesign of the NYCePay platform—a critical service used for paying property taxes, fines, and other city fees.
+          </p>
+          <p>
+            My hands-on analysis revealed four core problems:
+          </p>
+          <ul class="list-disc list-inside space-y-1 pl-1">
+            <li><span class="font-medium">Navigation nightmare</span> — convoluted menus and unclear pathways wasted users' time.</li>
+            <li><span class="font-medium">Payment friction</span> — limited options and clunky scheduling created unnecessary hurdles.</li>
+            <li><span class="font-medium">Lack of clarity</span> — no clear feedback on payment statuses left users anxious and uncertain.</li>
+            <li><span class="font-medium">Poor overall experience</span> — slow, unresponsive, and difficult to operate.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- My Role -->
+      <div class="flex flex-col gap-2 w-full max-w-[800px]">
+        <h2 class="font-lato font-bold text-[18px] text-[#2c2c2c] leading-[1.5]">
+          My Role
+        </h2>
+        <div class="font-lato font-normal text-[18px] text-[#2c2c2c] leading-[1.5] space-y-3">
+          <p>
+            As the <span class="font-medium">sole UI/UX designer</span> on this initiative, I was entrusted with the end-to-end user experience and visual design. I worked in a lean, agile team alongside two business analysts to define problems, conceptualize solutions, and deliver high-fidelity designs—all within a <span class="font-medium">one-month timeline</span>.
+          </p>
+          <p>
+            My approach was intentionally pragmatic: I focused on surgical, high-impact interventions in the most critical user journeys to deliver maximum value within the tight deadline.
+          </p>
+        </div>
+      </div>
+
+      <!-- Video Section -->
+      <div class="flex flex-col gap-3 w-full max-w-[800px]">
+        <p class="font-lato font-normal text-[18px] text-[#2c2c2c] leading-[1.5]">
+          <span class="font-bold">Watch the full case study</span> to see the redesign strategy and key improvements:
+        </p>
+        <VideoPlayer
+          src={project.video.src}
+          poster={project.video.poster}
+        />
+      </div>
+
+      <!-- Before/After Comparisons -->
+      <div class="flex flex-col gap-8 w-full max-w-[800px]">
+        <p class="font-lato font-normal text-[18px] text-[#2c2c2c] leading-[1.5]">
+          <span class="font-bold">Drag to compare</span> the before and after designs for each key improvement:
+        </p>
+
+        {comparisons.map((comp, index) => (
+          <div class="flex flex-col gap-4">
+            <h3 class="font-lato font-bold text-[18px] text-[#2c2c2c] leading-[1.5]">
+              {index + 1}. {comp.title}
+            </h3>
+            <BeforeAfterSlider
+              beforeImage={comp.before}
+              afterImage={comp.after}
+              beforeAlt={`${comp.title} - Before`}
+              afterAlt={`${comp.title} - After`}
+            />
+            <p class="font-lato font-normal text-[18px] text-[#2c2c2c] leading-[1.5] mt-1">
+              {comp.description}
+            </p>
+          </div>
+        ))}
+      </div>
+
+      <!-- The Outcome -->
+      <div class="flex flex-col gap-2 w-full max-w-[800px]">
+        <h2 class="font-lato font-bold text-[18px] text-[#2c2c2c] leading-[1.5]">
+          The Outcome
+        </h2>
+        <div class="font-lato font-normal text-[18px] text-[#2c2c2c] leading-[1.5] space-y-3">
+          <p>
+            While our proposal demonstrated significant improvements in usability and clarity, it wasn't awarded the contract. Despite this outcome, the project was an invaluable learning experience that sharpened my approach to complex system redesigns.
+          </p>
+          <p>
+            Two lessons stood out. First, the critical importance of <span class="font-medium">deep investigation</span>—spending time to truly understand an application's flaws is essential for crafting solutions that serve both business goals and user needs. Second, the immense value of <span class="font-medium">close collaboration</span>—working in lockstep with business analysts kept the project aligned and ensured design decisions were always grounded in strategic objectives.
+          </p>
+          <p>
+            Even though this specific proposal didn't move forward, the experience equipped me with a robust framework I now apply to all legacy system challenges.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Other Projects Section -->
+    <div class="flex flex-col gap-4 w-full max-w-[800px] mx-auto">
+      <h2 class="font-lato font-light text-[28px] text-[#2c2c2c] leading-normal">
+        Other projects
+      </h2>
+      <div class="flex gap-1">
+        {otherProjects.map((proj) => (
+          <a
+            href={`/work/${proj.slug}`}
+            class="flex items-center justify-center overflow-hidden size-[200px] px-3 hover:opacity-90 transition-opacity"
+            style={`background-color: ${proj.bgColor}`}
+          >
+            <p class="font-lato font-normal text-2xl text-[#f5f5f5] text-center w-full">
+              {proj.name}
+            </p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,264 @@
+---
+interface Props {
+  beforeImage: string;
+  afterImage: string;
+  beforeAlt?: string;
+  afterAlt?: string;
+  beforeLabel?: string;
+  afterLabel?: string;
+  class?: string;
+}
+
+const {
+  beforeImage,
+  afterImage,
+  beforeAlt = 'Before',
+  afterAlt = 'After',
+  beforeLabel = 'Before',
+  afterLabel = 'After',
+  class: className = ''
+} = Astro.props;
+
+const uniqueId = `ba-${Math.random().toString(36).substr(2, 9)}`;
+---
+
+<div class={`ba-slider ${className}`} id={uniqueId}>
+  <div class="ba-wrapper">
+    <!-- After image (background, full width) -->
+    <div class="ba-after">
+      <img src={afterImage} alt={afterAlt} class="ba-img ba-img-after" draggable="false" />
+      <span class="ba-label ba-label-after">{afterLabel}</span>
+    </div>
+
+    <!-- Before image (foreground, clipped) -->
+    <div class="ba-before">
+      <div class="ba-before-inner">
+        <img src={beforeImage} alt={beforeAlt} class="ba-img ba-img-before" draggable="false" />
+        <span class="ba-label ba-label-before">{beforeLabel}</span>
+      </div>
+    </div>
+
+    <!-- Slider control -->
+    <div class="ba-handle">
+      <div class="ba-handle-line"></div>
+      <div class="ba-handle-circle">
+        <svg width="20" height="14" viewBox="0 0 20 14" fill="none">
+          <path d="M6 1L1 7L6 13" stroke="#666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M14 1L19 7L14 13" stroke="#666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .ba-slider {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 8px;
+  }
+
+  .ba-wrapper {
+    position: relative;
+    width: 100%;
+    cursor: ew-resize;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  .ba-after {
+    position: relative;
+    display: block;
+    width: 100%;
+    background: #e0e0e0;
+  }
+
+  .ba-before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    background: #d0d0d0;
+  }
+
+  .ba-before-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .ba-img {
+    display: block;
+    pointer-events: none;
+  }
+
+  .ba-img-after {
+    width: 100%;
+    height: auto;
+  }
+
+  .ba-img-before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: auto;
+    height: auto;
+    max-width: none;
+  }
+
+  .ba-label {
+    position: absolute;
+    bottom: 16px;
+    padding: 6px 14px;
+    background: rgba(100, 100, 100, 0.85);
+    color: white;
+    font-family: 'Lato', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 4px;
+    pointer-events: none;
+    z-index: 5;
+  }
+
+  .ba-label-before {
+    left: 16px;
+  }
+
+  .ba-label-after {
+    right: 16px;
+  }
+
+  .ba-handle {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 44px;
+    margin-left: -22px;
+    cursor: ew-resize;
+    z-index: 10;
+  }
+
+  .ba-handle-line {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 3px;
+    background: white;
+    transform: translateX(-50%);
+    box-shadow: 0 0 6px rgba(0,0,0,0.4);
+  }
+
+  .ba-handle-circle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 44px;
+    height: 44px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+    cursor: ew-resize;
+  }
+
+  .ba-handle-circle:hover {
+    box-shadow: 0 2px 16px rgba(0,0,0,0.3);
+  }
+</style>
+
+<script define:vars={{ uniqueId }}>
+  function initSlider() {
+    const slider = document.getElementById(uniqueId);
+    if (!slider || slider.dataset.initialized === 'true') return;
+    slider.dataset.initialized = 'true';
+
+    const wrapper = slider.querySelector('.ba-wrapper');
+    const before = slider.querySelector('.ba-before');
+    const handle = slider.querySelector('.ba-handle');
+    const afterImg = slider.querySelector('.ba-img-after');
+    const beforeImg = slider.querySelector('.ba-img-before');
+
+    if (!wrapper || !before || !handle || !afterImg || !beforeImg) return;
+
+    let isDragging = false;
+
+    // Set before image width to match container width (fit by width)
+    function syncBeforeImage() {
+      const containerWidth = wrapper.offsetWidth;
+      beforeImg.style.width = containerWidth + 'px';
+      beforeImg.style.height = 'auto';
+    }
+
+    // Wait for images to load
+    function initWhenReady() {
+      if (afterImg.complete && beforeImg.complete) {
+        syncBeforeImage();
+      }
+    }
+
+    afterImg.addEventListener('load', initWhenReady);
+    beforeImg.addEventListener('load', initWhenReady);
+    initWhenReady();
+
+    window.addEventListener('resize', syncBeforeImage);
+
+    function updatePosition(clientX) {
+      const rect = wrapper.getBoundingClientRect();
+      let percent = ((clientX - rect.left) / rect.width) * 100;
+
+      // Allow full range from 0 to 100
+      percent = Math.max(0, Math.min(100, percent));
+
+      before.style.width = percent + '%';
+      handle.style.left = percent + '%';
+      handle.style.marginLeft = '-22px';
+    }
+
+    // Mouse events
+    wrapper.addEventListener('mousedown', function(e) {
+      e.preventDefault();
+      isDragging = true;
+      updatePosition(e.clientX);
+    });
+
+    document.addEventListener('mousemove', function(e) {
+      if (!isDragging) return;
+      updatePosition(e.clientX);
+    });
+
+    document.addEventListener('mouseup', function() {
+      isDragging = false;
+    });
+
+    // Touch events
+    wrapper.addEventListener('touchstart', function(e) {
+      isDragging = true;
+      updatePosition(e.touches[0].clientX);
+    }, { passive: true });
+
+    document.addEventListener('touchmove', function(e) {
+      if (!isDragging) return;
+      updatePosition(e.touches[0].clientX);
+    }, { passive: true });
+
+    document.addEventListener('touchend', function() {
+      isDragging = false;
+    });
+  }
+
+  // Initialize
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initSlider);
+  } else {
+    initSlider();
+  }
+  document.addEventListener('astro:page-load', initSlider);
+</script>
