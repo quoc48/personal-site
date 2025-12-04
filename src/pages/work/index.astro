@@ -17,9 +17,8 @@ const projects = [
 
 // Experiments data
 const experiments = [
-  { name: 'Claude Code', bgColor: '#c66240' },
-  { name: 'Expenses\nTracker', bgColor: '#5a5a5a' },
-  { name: 'LLM Engineers Handbook', bgColor: '#5a5a5a' },
+  { name: 'Claude Code', bgColor: '#c66240', slug: 'claude-code' },
+  { name: 'Expense\nTracker', bgColor: '#5a5a5a', slug: 'expense-tracker' },
 ];
 
 // Knowledge areas
@@ -71,7 +70,7 @@ const knowledge = [
     <!-- Section 2: Projects I've built -->
     <div class="flex flex-col gap-4">
       <h2 class="font-lato font-light text-[28px] text-[#2c2c2c] leading-normal">
-        Few projects I've built for company.
+        A few projects I've built.
       </h2>
       <div class="flex gap-1">
         {projects.map((project) => (
@@ -91,18 +90,30 @@ const knowledge = [
     <!-- Section 3: Experiments -->
     <div class="flex flex-col gap-4">
       <h2 class="font-lato font-light text-[28px] text-[#2c2c2c] leading-normal">
-        Things I'm experimenting on.
+        Things I'm experimenting with.
       </h2>
       <div class="flex gap-1">
         {experiments.map((exp) => (
-          <div
-            class="flex items-center justify-center overflow-hidden size-[200px] px-3"
-            style={`background-color: ${exp.bgColor}`}
-          >
-            <p class="font-lato font-normal text-2xl text-[#f5f5f5] text-center w-full leading-[1.5] whitespace-pre-line">
-              {exp.name}
-            </p>
-          </div>
+          exp.slug ? (
+            <a
+              href={`/work/${exp.slug}`}
+              class="flex items-center justify-center overflow-hidden size-[200px] px-3 hover:opacity-90 transition-opacity"
+              style={`background-color: ${exp.bgColor}`}
+            >
+              <p class="font-lato font-normal text-2xl text-[#f5f5f5] text-center w-full leading-[1.5] whitespace-pre-line">
+                {exp.name}
+              </p>
+            </a>
+          ) : (
+            <div
+              class="flex items-center justify-center overflow-hidden size-[200px] px-3"
+              style={`background-color: ${exp.bgColor}`}
+            >
+              <p class="font-lato font-normal text-2xl text-[#f5f5f5] text-center w-full leading-[1.5] whitespace-pre-line">
+                {exp.name}
+              </p>
+            </div>
+          )
         ))}
       </div>
     </div>
@@ -110,7 +121,7 @@ const knowledge = [
     <!-- Section 4: Knowledge -->
     <div class="flex flex-col gap-4">
       <h2 class="font-lato font-light text-[28px] text-[#2c2c2c] leading-normal">
-        Knowledges I gain.
+        Knowledge I've gained.
       </h2>
       <div class="flex gap-1 w-full">
         {knowledge.map((item) => (

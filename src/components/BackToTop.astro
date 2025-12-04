@@ -1,0 +1,39 @@
+---
+// Back to Top button - appears when user scrolls down
+---
+
+<button
+  id="back-to-top"
+  class="fixed bottom-8 right-8 z-50 flex items-center gap-2 px-4 py-2.5 bg-[#2c2c2c] text-white font-lato font-medium text-sm rounded-lg shadow-lg opacity-0 invisible translate-y-4 transition-all duration-300 hover:bg-[#1a1a1a]"
+  aria-label="Back to top"
+>
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M18 15L12 9L6 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  Back to top
+</button>
+
+<script>
+  const backToTopBtn = document.getElementById('back-to-top');
+
+  if (backToTopBtn) {
+    // Show/hide button based on scroll position
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 400) {
+        backToTopBtn.classList.remove('opacity-0', 'invisible', 'translate-y-4');
+        backToTopBtn.classList.add('opacity-100', 'visible', 'translate-y-0');
+      } else {
+        backToTopBtn.classList.add('opacity-0', 'invisible', 'translate-y-4');
+        backToTopBtn.classList.remove('opacity-100', 'visible', 'translate-y-0');
+      }
+    });
+
+    // Scroll to top when clicked
+    backToTopBtn.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+  }
+</script>

@@ -2,8 +2,8 @@
 const currentYear = new Date().getFullYear();
 
 const socialLinks = [
-  { href: 'https://linkedin.com/in/quocphan', icon: '/linkedin-icon.svg', label: 'LinkedIn' },
-  { href: 'https://github.com/quocphan', icon: '/github-icon.svg', label: 'GitHub' },
+  { href: 'https://www.linkedin.com/in/quocphan731', icon: '/linkedin-icon.svg', label: 'LinkedIn' },
+  { href: 'https://github.com/quoc48', icon: '/github-icon.svg', label: 'GitHub' },
 ];
 ---
 
@@ -19,6 +19,7 @@ const socialLinks = [
             rel="noopener noreferrer"
             class="hover:opacity-70 transition-opacity"
             aria-label={link.label}
+            title={link.label}
           >
             <img src={link.icon} alt={link.label} class="size-6" />
           </a>

@@ -1,0 +1,75 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BackToTop from '../../components/BackToTop.astro';
+---
+
+<BaseLayout
+  title="Claude Code - Quoc Phan"
+  description="My journey learning vibe coding with Claude Code - why AI-assisted coding is a must-have skill for product people."
+>
+  <section class="flex flex-col gap-12 px-[50px] py-8">
+    <div class="flex flex-col gap-8 items-center w-full">
+      <!-- Back Button -->
+      <div class="w-full max-w-[800px]">
+        <a
+          href="/work"
+          class="inline-flex items-center gap-2 font-lato font-normal text-base text-[#2c2c2c] hover:opacity-70 transition-opacity"
+        >
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Back to Work
+        </a>
+      </div>
+
+      <!-- Title -->
+      <h1 class="font-lato font-normal text-[28px] text-[#2c2c2c] leading-normal w-full max-w-[800px]">
+        Why I'm Betting on Vibe Coding
+      </h1>
+
+      <!-- Content -->
+      <div class="flex flex-col gap-6 w-full max-w-[800px]">
+        <div class="font-lato font-normal text-[18px] text-[#2c2c2c] leading-[1.5] space-y-4">
+          <p>
+            "Vibe coding" might sound like another tech buzzword, but I genuinely believe it's becoming an essential skill for product people who want to stay hands-on. The ability to turn ideas into working prototypes—without waiting for engineering resources—changes how you think about product development.
+          </p>
+
+          <p>
+            There's no shortage of AI coding assistants these days: Claude Code, Gemini CLI, GitHub Copilot, Cursor, and more keep popping up. After experimenting with several, I've settled on <span class="font-medium">Claude Code</span> as my daily driver. It just clicks with how I think and work.
+          </p>
+        </div>
+
+        <div class="font-lato font-normal text-[18px] text-[#2c2c2c] leading-[1.5] space-y-4">
+          <h2 class="font-bold">What I'm Building</h2>
+          <p>
+            Right now, I'm using Claude Code to build my first real app—an <a href="/work/expense-tracker" class="font-medium underline decoration-1 underline-offset-4 hover:decoration-2 transition-all">expense tracker</a>. It's nothing fancy, but that's kind of the point. I wanted to experience the full cycle: setting up a project, making architecture decisions, debugging weird issues at 11pm, and actually shipping something.
+          </p>
+          <p>
+            The process has been humbling. I've learned more about how software actually works in a few weeks than I did reading documentation for months. When you're responsible for every line of code (even if AI helped write it), you start caring about things like error handling and edge cases in a whole new way.
+          </p>
+        </div>
+
+        <div class="font-lato font-normal text-[18px] text-[#2c2c2c] leading-[1.5] space-y-4">
+          <h2 class="font-bold">Learning by Reading Code</h2>
+          <p>
+            Beyond building, I've been using Claude Code to explore codebases of AI/ML projects. There's something powerful about being able to ask "what does this function do?" and getting a clear explanation in context. It's like having a patient senior engineer who never gets tired of your questions.
+          </p>
+          <p>
+            This has become my favorite way to learn—not tutorials, not courses, just diving into real code with an AI assistant to help me understand what I'm looking at.
+          </p>
+        </div>
+
+        <div class="font-lato font-normal text-[18px] text-[#2c2c2c] leading-[1.5] space-y-4">
+          <h2 class="font-bold">Still Learning, Always Curious</h2>
+          <p>
+            I'm not claiming to be an expert. Far from it. But I'm convinced that the designers and product managers who can prototype their ideas, who understand code well enough to have real conversations with engineers, will have a meaningful advantage in the years ahead.
+          </p>
+          <p>
+            So I keep practicing, keep building, keep breaking things. It's frustrating sometimes, rewarding often, and never boring.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <BackToTop />
+</BaseLayout>
