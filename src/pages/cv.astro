@@ -1,8 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-// PDF parameters: show toolbar, fit width, start at page 1
-const pdfPath = '/Quoc-CV.pdf#toolbar=1&navpanes=0&scrollbar=1&view=FitH&zoom=page-width';
+const pdfPath = '/Quoc-CV.pdf';
 const downloadPath = '/Quoc-CV.pdf';
 ---
 
@@ -34,11 +33,20 @@ const downloadPath = '/Quoc-CV.pdf';
 
     <!-- PDF Viewer -->
     <div class="w-full">
-      <!-- Mobile: Use Google Docs Viewer for better compatibility -->
+      <!-- Mobile: Google Docs Viewer -->
       <iframe
-        id="pdf-viewer"
-        class="w-full rounded-lg border border-gray-200"
+        id="pdf-viewer-mobile"
+        class="md:hidden w-full rounded-lg border border-gray-200"
         style="height: 70vh; min-height: 500px;"
+        title="Quoc Phan's CV"
+      ></iframe>
+      
+      <!-- Desktop: Native PDF with aspect ratio -->
+      <iframe
+        id="pdf-viewer-desktop"
+        src={`${pdfPath}#toolbar=1&navpanes=0&view=FitH`}
+        class="hidden md:block w-full rounded-lg border border-gray-200"
+        style="aspect-ratio: 210 / 297;"
         title="Quoc Phan's CV"
       ></iframe>
     </div>
@@ -47,20 +55,13 @@ const downloadPath = '/Quoc-CV.pdf';
 
 <script>
   function initPdfViewer() {
-    const iframe = document.getElementById('pdf-viewer') as HTMLIFrameElement;
-    if (!iframe) return;
+    const mobileViewer = document.getElementById('pdf-viewer-mobile') as HTMLIFrameElement;
+    if (!mobileViewer) return;
     
+    // Set mobile viewer source with Google Docs Viewer
     const pdfUrl = '/Quoc-CV.pdf';
-    const isMobile = window.innerWidth < 768;
-    
-    if (isMobile) {
-      // On mobile, use Google Docs Viewer for better rendering
-      const fullUrl = window.location.origin + pdfUrl;
-      iframe.src = `https://docs.google.com/viewer?url=${encodeURIComponent(fullUrl)}&embedded=true`;
-    } else {
-      // On desktop, use native PDF viewer with toolbar
-      iframe.src = pdfUrl + '#toolbar=1&navpanes=0&view=FitH';
-    }
+    const fullUrl = window.location.origin + pdfUrl;
+    mobileViewer.src = `https://docs.google.com/viewer?url=${encodeURIComponent(fullUrl)}&embedded=true`;
   }
 
   document.addEventListener('DOMContentLoaded', initPdfViewer);
