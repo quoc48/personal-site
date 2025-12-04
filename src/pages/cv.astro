@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-const pdfPath = '/Quoc-CV.pdf#view=FitH&pagemode=none';
+const pdfPath = '/Quoc-CV.pdf#toolbar=1&navpanes=0&view=FitH';
 const downloadPath = '/Quoc-CV.pdf';
 ---
 
@@ -26,12 +26,12 @@ const downloadPath = '/Quoc-CV.pdf';
       </a>
     </div>
 
-    <!-- PDF Viewer - Full width, responsive height capped to PDF size -->
+    <!-- PDF Viewer - Full width, fixed height matching PDF -->
     <div class="w-full">
       <iframe
         src={pdfPath}
         class="w-full rounded-lg border border-gray-200"
-        style="height: calc(100vh - 200px); max-height: 1150px;"
+        style="height: 1350px;"
         title="Quoc Phan's CV"
       ></iframe>
     </div>
