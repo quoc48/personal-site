@@ -2,6 +2,7 @@
 const navLinks = [
   { href: '/work', label: 'Work' },
   { href: '/contact', label: 'Contact' },
+  { href: '/cv', label: 'My CV' },
 ];
 
 const currentPath = Astro.url.pathname;
@@ -31,17 +32,6 @@ const currentPath = Astro.url.pathname;
           </a>
         </li>
       ))}
-      <!-- External CV Link -->
-      <li>
-        <a
-          href="https://www.dropbox.com/scl/fi/s31fycv7qd58l2szvl4z4/Quoc-s-CV.pdf?rlkey=ffonkk3eymvdpubi8ucvv5omx&st=u4wvypob&dl=0"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="font-lato text-xl text-[#1E1E1E] transition-opacity hover:opacity-70 font-light"
-        >
-          My CV
-        </a>
-      </li>
     </ul>
   </nav>
 </header>
