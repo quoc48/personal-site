@@ -122,6 +122,7 @@ const uniqueId = `ba-${Math.random().toString(36).substr(2, 9)}`;
     border-radius: 4px;
     pointer-events: none;
     z-index: 5;
+    transition: opacity 0.2s ease;
   }
 
   @media (min-width: 768px) {
@@ -235,6 +236,8 @@ const uniqueId = `ba-${Math.random().toString(36).substr(2, 9)}`;
     const handle = slider.querySelector('.ba-handle');
     const afterImg = slider.querySelector('.ba-img-after');
     const beforeImg = slider.querySelector('.ba-img-before');
+    const beforeLabel = slider.querySelector('.ba-label-before');
+    const afterLabel = slider.querySelector('.ba-label-after');
 
     if (!wrapper || !before || !handle || !afterImg || !beforeImg) return;
 
@@ -273,6 +276,14 @@ const uniqueId = `ba-${Math.random().toString(36).substr(2, 9)}`;
       // Adjust margin based on screen size
       const isMobile = window.innerWidth < 768;
       handle.style.marginLeft = isMobile ? '-20px' : '-22px';
+
+      // Hide/show labels based on slider position
+      if (beforeLabel) {
+        beforeLabel.style.opacity = percent < 15 ? '0' : '1';
+      }
+      if (afterLabel) {
+        afterLabel.style.opacity = percent > 85 ? '0' : '1';
+      }
     }
 
     // Mouse events
