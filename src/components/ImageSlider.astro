@@ -3,30 +3,40 @@ interface Props {
   images: string[];
   alts?: string[];
   class?: string;
+  aspectRatio?: 'auto' | 'portrait' | 'landscape' | 'square';
 }
 
-const { images = [], alts = [], class: className = '' } = Astro.props;
+const { images = [], alts = [], class: className = '', aspectRatio = 'auto' } = Astro.props;
+
+// Preset aspect ratios for manual override
+const aspectRatioClasses = {
+  portrait: 'aspect-[3/4]',
+  landscape: 'aspect-[16/9]',
+  square: 'aspect-square',
+  auto: '', // Will be calculated by JS
+};
 ---
 
-<div class={`image-slider relative bg-black ${className}`}>
+<div class={`image-slider relative bg-black ${className}`} data-aspect-ratio={aspectRatio}>
   <!-- Main Images Container -->
-  <div class="slider-track relative w-full h-[468px] overflow-hidden">
+  <div class={`slider-track relative w-full overflow-hidden ${aspectRatio !== 'auto' ? aspectRatioClasses[aspectRatio] : 'min-h-[300px]'}`}>
     {images.map((image, index) => (
       <div
-        class={`slide absolute inset-0 flex items-start justify-center p-4 pt-6 transition-opacity duration-300 ${index === 0 ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+        class={`slide absolute inset-0 flex items-center justify-center p-4 transition-opacity duration-300 ${index === 0 ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
         data-index={index}
       >
         <img
           src={image}
           alt={alts[index] || `Slide ${index + 1}`}
-          class="slide-image max-w-full max-h-full w-auto h-auto object-contain object-top"
+          class="slide-image max-w-full max-h-full w-auto h-auto object-contain"
+          loading={index === 0 ? 'eager' : 'lazy'}
         />
       </div>
     ))}
 
     <!-- Fullscreen Toggle Button -->
     <button
-      class="fullscreen-btn absolute top-6 right-3 w-8 h-8 bg-black/50 hover:bg-black/70 rounded flex items-center justify-center transition-colors z-10 focus:outline-none"
+      class="fullscreen-btn absolute top-3 right-3 w-8 h-8 bg-black/50 hover:bg-black/70 rounded flex items-center justify-center transition-colors z-10 focus:outline-none"
       aria-label="Toggle fullscreen"
     >
       <!-- Expand Icon (arrows pointing outward) -->
@@ -41,7 +51,7 @@ const { images = [], alts = [], class: className = '' } = Astro.props;
   </div>
 
   <!-- Navigation Arrows -->
-  <div class="arrows-container absolute inset-x-0 top-1/2 -translate-y-1/2 flex justify-between px-3 pointer-events-none" style="top: calc(50% - 40px);">
+  <div class="arrows-container absolute inset-x-0 top-0 bottom-[64px] flex items-center justify-between px-3 pointer-events-none">
     <!-- Left Arrow -->
     <button
       class="arrow-left pointer-events-auto w-[40px] h-[40px] bg-black/60 hover:bg-black/80 backdrop-blur-sm rounded-full flex items-center justify-center transition-colors focus:outline-none shadow-lg"
@@ -93,12 +103,13 @@ const { images = [], alts = [], class: className = '' } = Astro.props;
   }
 
   .image-slider.fullscreen .slider-track {
-    height: calc(100vh - 80px) !important;
+    height: calc(100vh - 64px) !important;
+    aspect-ratio: unset !important;
+    min-height: unset !important;
   }
 
-  /* Ensure consistent top alignment in fullscreen */
-  .image-slider.fullscreen .slide {
-    padding-top: 32px !important;
+  .image-slider.fullscreen .arrows-container {
+    bottom: 64px !important;
   }
 
   .image-slider.fullscreen .expand-icon {
@@ -119,13 +130,47 @@ const { images = [], alts = [], class: className = '' } = Astro.props;
       if (slider.getAttribute('data-initialized')) return;
       slider.setAttribute('data-initialized', 'true');
 
+      const sliderTrack = slider.querySelector('.slider-track') as HTMLElement;
       const slides = slider.querySelectorAll('.slide');
       const thumbnails = slider.querySelectorAll('.thumbnail');
       const arrowLeft = slider.querySelector('.arrow-left');
       const arrowRight = slider.querySelector('.arrow-right');
       const fullscreenBtn = slider.querySelector('.fullscreen-btn');
+      const aspectRatioMode = slider.getAttribute('data-aspect-ratio');
 
       if (slides.length === 0) return;
+
+      // Auto-detect aspect ratio from first image
+      if (aspectRatioMode === 'auto' && sliderTrack) {
+        const firstImage = slider.querySelector('.slide-image') as HTMLImageElement;
+
+        const setDynamicHeight = () => {
+          if (firstImage.naturalWidth && firstImage.naturalHeight) {
+            const aspectRatio = firstImage.naturalWidth / firstImage.naturalHeight;
+            const containerWidth = sliderTrack.offsetWidth - 32; // Account for padding
+            let calculatedHeight = containerWidth / aspectRatio;
+
+            // Clamp height between 300px and 600px for reasonable display
+            calculatedHeight = Math.max(300, Math.min(600, calculatedHeight));
+
+            sliderTrack.style.height = `${calculatedHeight}px`;
+            sliderTrack.style.minHeight = 'unset';
+          }
+        };
+
+        if (firstImage.complete) {
+          setDynamicHeight();
+        } else {
+          firstImage.addEventListener('load', setDynamicHeight);
+        }
+
+        // Recalculate on window resize
+        window.addEventListener('resize', () => {
+          if (!slider.classList.contains('fullscreen')) {
+            setDynamicHeight();
+          }
+        });
+      }
 
       let currentIndex = 0;
 

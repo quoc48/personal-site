@@ -1,0 +1,154 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import VideoPlayer from '../../components/VideoPlayer.astro';
+import ImageSlider from '../../components/ImageSlider.astro';
+
+// Project data
+const project = {
+  title: 'Designing for Government',
+  video: {
+    src: '/projects/government/Designing_for_Government.mp4',
+    poster: '',
+  },
+  images: [
+    '/projects/government/slides/1.png',
+    '/projects/government/slides/2.png',
+    '/projects/government/slides/3.png',
+    '/projects/government/slides/4.png',
+    '/projects/government/slides/5.png',
+  ],
+};
+
+// Other projects (excluding current)
+const otherProjects = [
+  { name: 'CRM', bgColor: '#f34213', slug: 'crm' },
+  { name: 'NYCePay', bgColor: '#2c2c2c', slug: 'nycepay' },
+  { name: 'Talk2Data', bgColor: '#18c1a8', slug: 'talk2data' },
+];
+---
+
+<BaseLayout
+  title={`${project.title} - Quoc Phan`}
+  description="Designing a customer intelligence platform for government law enforcement agencies."
+>
+  <section class="flex flex-col gap-12 px-[50px] py-8">
+    <div class="flex flex-col gap-8 items-center w-full">
+      <!-- Back Button -->
+      <div class="w-full max-w-[800px]">
+        <a
+          href="/work"
+          class="inline-flex items-center gap-2 font-lato font-normal text-base text-[#2c2c2c] hover:opacity-70 transition-opacity"
+        >
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Back to Work
+        </a>
+      </div>
+
+      <!-- Project Title -->
+      <h1 class="font-lato font-normal text-[28px] text-[#2c2c2c] leading-normal w-full max-w-[800px]">
+        {project.title}
+      </h1>
+
+      <!-- The Challenge -->
+      <div class="flex flex-col gap-2 w-full max-w-[800px]">
+        <h2 class="font-lato font-bold text-[18px] text-[#2c2c2c] leading-[1.5]">
+          The Challenge
+        </h2>
+        <div class="font-lato font-normal text-[18px] text-[#2c2c2c] leading-[1.5] space-y-3">
+          <p>
+            The opportunity to design a critical tool for government law enforcement from the ground up is rare. Tapestrii 10Q is a customer intelligence platform that streamlines investigations by consolidating case, document, and artifact management into a single interface. When the project moved from concept to build, I stepped into a leadership role to guide the design team through this complex challenge.
+          </p>
+          <p>
+            We faced three core obstacles right from the start:
+          </p>
+          <ul class="list-disc list-inside space-y-1 pl-1">
+            <li><span class="font-medium">A brand new design system</span> — we had to develop and refine it in parallel with building the platform, constantly validating as we went.</li>
+            <li><span class="font-medium">Strict accessibility mandates</span> — the platform needed to be fully accessible, which meant training our dev team on proper implementation.</li>
+            <li><span class="font-medium">Responsive design requirements</span> — complex data-heavy layouts had to work seamlessly across all screen sizes.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- My Role -->
+      <div class="flex flex-col gap-2 w-full max-w-[800px]">
+        <h2 class="font-lato font-bold text-[18px] text-[#2c2c2c] leading-[1.5]">
+          My Role
+        </h2>
+        <div class="font-lato font-normal text-[18px] text-[#2c2c2c] leading-[1.5] space-y-3">
+          <p>
+            My role on this project was twofold, allowing me to both steer the strategic vision and contribute to hands-on execution:
+          </p>
+          <ul class="list-disc list-inside space-y-1 pl-1">
+            <li><span class="font-medium">Product Lead:</span> Responsible for the overall quality and direction of design work, reviewing everything the team created to ensure we stayed on track.</li>
+            <li><span class="font-medium">Design Contributor:</span> Actively participated in the design process, rolling up my sleeves to create UI mockups and contribute directly to the interface.</li>
+          </ul>
+          <p>
+            I led kickoff sessions to define core functions—Global-Federated Search, Case Management, and Artifact Management. We worked in close collaboration with the design system team, building components only as they were immediately needed. To meet accessibility standards without creating bottlenecks, I helped define flexible design deliverables that clarified implementation details and minimized back-and-forth with developers.
+          </p>
+        </div>
+      </div>
+
+      <!-- Video Section -->
+      <div class="flex flex-col gap-3 w-full max-w-[800px]">
+        <p class="font-lato font-normal text-[18px] text-[#2c2c2c] leading-[1.5]">
+          <span class="font-bold">Watch the full case study</span> to see how we designed the Global-Federated Search—the intelligence-gathering engine at the heart of the platform:
+        </p>
+        <VideoPlayer
+          src={project.video.src}
+          poster={project.video.poster}
+        />
+      </div>
+
+      <!-- Image Slider Section -->
+      <div class="flex flex-col gap-3 w-full max-w-[800px]">
+        <p class="font-lato font-normal text-[18px] text-[#2c2c2c] leading-[1.5]">
+          <span class="font-bold">Browse the UI mockups</span> to explore the key screens and workflows:
+        </p>
+        <ImageSlider
+          images={project.images}
+          alts={['Slide 1', 'Slide 2', 'Slide 3', 'Slide 4', 'Slide 5']}
+        />
+      </div>
+
+      <!-- The Outcome -->
+      <div class="flex flex-col gap-2 w-full max-w-[800px]">
+        <h2 class="font-lato font-bold text-[18px] text-[#2c2c2c] leading-[1.5]">
+          The Outcome
+        </h2>
+        <div class="font-lato font-normal text-[18px] text-[#2c2c2c] leading-[1.5] space-y-3">
+          <p>
+            Designing a complex, large-scale product for a government client was an invaluable experience. The project served as a real-world masterclass in navigating technical constraints, fostering team alignment, and delivering a high-stakes digital tool.
+          </p>
+          <p>
+            Two lessons stood out. First, I learned the profound impact of effective communication within a cross-functional team—building something this complex is impossible in a silo. Second, the project reinforced the importance of creating a scalable design approach. By investing time upfront in our design system and establishing clear processes, we built a foundation that could support the platform's continued growth.
+          </p>
+          <p>
+            And the best part? We're not done yet. There are always new challenges on the horizon.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Other Projects Section -->
+    <div class="flex flex-col gap-4 w-full max-w-[800px] mx-auto">
+      <h2 class="font-lato font-light text-[28px] text-[#2c2c2c] leading-normal">
+        Other projects
+      </h2>
+      <div class="flex gap-1">
+        {otherProjects.map((proj) => (
+          <a
+            href={`/work/${proj.slug}`}
+            class="flex items-center justify-center overflow-hidden size-[200px] px-3 hover:opacity-90 transition-opacity"
+            style={`background-color: ${proj.bgColor}`}
+          >
+            <p class="font-lato font-normal text-2xl text-[#f5f5f5] text-center w-full">
+              {proj.name}
+            </p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
