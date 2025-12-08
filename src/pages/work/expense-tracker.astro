@@ -83,11 +83,259 @@ import BackToTop from '../../components/BackToTop.astro';
             There's still a lot I want to add: advanced reports with better visualizations, voice input for quick logging, maybe some smart insights about spending habits. The beauty of building your own tool is that you can shape it exactly how you want, at your own pace.
           </p>
           <p>
-            The project is completely public. Feel free to explore the code, use it as reference, or just see how a designer approaches building a real app: <a href="https://github.com/quoc48/expense_tracker" target="_blank" rel="noopener noreferrer" class="font-medium underline decoration-1 underline-offset-4 hover:decoration-2 transition-all">github.com/quoc48/expense_tracker</a>
+            The project is completely public. Feel free to explore the code, use it as reference, or just see how a designer approaches building a real app.
           </p>
+        </div>
+
+        <!-- Video Demo Section -->
+        <div class="flex flex-col gap-6 items-center w-full max-w-[800px]">
+          <h2 class="font-lato font-bold text-base md:text-[18px] text-[#2c2c2c] w-full">Demo</h2>
+          <div id="demo-video-container" class="relative w-full flex justify-center bg-black rounded-xl">
+            <video
+              id="demo-video"
+              autoplay
+              muted
+              loop
+              playsinline
+              class="w-auto max-w-full h-auto max-h-[600px] md:max-h-[700px] rounded-xl cursor-pointer"
+            >
+              <source src="/assets/expense-tracker/demo.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+
+            <!-- Custom Controls Overlay -->
+            <div id="demo-controls" class="absolute bottom-0 left-0 right-0 px-4 pb-4 pt-12 bg-gradient-to-t from-black/80 to-transparent opacity-0 transition-opacity rounded-b-xl">
+              <!-- Progress Bar -->
+              <div id="demo-progress-container" class="relative h-1 bg-white/30 rounded-full mb-4 cursor-pointer group">
+                <div id="demo-progress" class="h-full bg-white rounded-full" style="width: 0%"></div>
+              </div>
+
+              <!-- Control Buttons -->
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <!-- Play/Pause -->
+                  <button id="demo-play-pause" class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-white/20 transition-colors">
+                    <svg id="demo-pause-icon" class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+                    </svg>
+                    <svg id="demo-play-icon" class="w-6 h-6 text-white hidden" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M8 5v14l11-7z"/>
+                    </svg>
+                  </button>
+                  <!-- Time -->
+                  <span id="demo-time" class="text-white text-sm font-mono">0:00 / 0:00</span>
+                </div>
+
+                <!-- Fullscreen -->
+                <button id="demo-fullscreen" class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-white/20 transition-colors">
+                  <svg id="demo-maximize-icon" class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+                  </svg>
+                  <svg id="demo-minimize-icon" class="w-5 h-5 text-white hidden" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+          <a
+            href="https://github.com/quoc48/expense_tracker"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#1E1E1E] text-white font-lato font-medium text-base rounded-lg hover:bg-[#333] transition-colors"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+            </svg>
+            Github Repository
+          </a>
         </div>
       </div>
     </div>
   </section>
   <BackToTop />
 </BaseLayout>
+
+<style>
+  #demo-video-container.fullscreen {
+    position: fixed !important;
+    inset: 0 !important;
+    z-index: 9999 !important;
+    max-width: none !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    border-radius: 0 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #demo-video-container.fullscreen #demo-video {
+    max-height: 100vh !important;
+    border-radius: 0 !important;
+  }
+
+  #demo-video-container.fullscreen #demo-controls {
+    opacity: 1;
+    border-radius: 0 !important;
+  }
+
+  /* Show controls on hover */
+  #demo-video-container:hover #demo-controls {
+    opacity: 1;
+  }
+
+  /* Show controls when video is paused */
+  #demo-video-container.paused #demo-controls {
+    opacity: 1;
+  }
+</style>
+
+<script is:inline>
+  (function() {
+    function initDemoVideo() {
+      const container = document.getElementById('demo-video-container');
+      const video = document.getElementById('demo-video');
+      const playPauseBtn = document.getElementById('demo-play-pause');
+      const playIcon = document.getElementById('demo-play-icon');
+      const pauseIcon = document.getElementById('demo-pause-icon');
+      const timeDisplay = document.getElementById('demo-time');
+      const progressBar = document.getElementById('demo-progress');
+      const progressContainer = document.getElementById('demo-progress-container');
+      const fullscreenBtn = document.getElementById('demo-fullscreen');
+      const maximizeIcon = document.getElementById('demo-maximize-icon');
+      const minimizeIcon = document.getElementById('demo-minimize-icon');
+
+      if (!video || !container) {
+        console.log('Video player elements not found');
+        return;
+      }
+
+      // Skip if already initialized
+      if (container.dataset.initialized) return;
+      container.dataset.initialized = 'true';
+
+      console.log('Initializing demo video player');
+
+      function formatTime(seconds) {
+        if (isNaN(seconds)) return '0:00';
+        const mins = Math.floor(seconds / 60);
+        const secs = Math.floor(seconds % 60);
+        return mins + ':' + secs.toString().padStart(2, '0');
+      }
+
+      // Play/Pause toggle
+      function togglePlay(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        if (video.paused) {
+          video.play();
+          container.classList.remove('paused');
+          if (playIcon) playIcon.classList.add('hidden');
+          if (pauseIcon) pauseIcon.classList.remove('hidden');
+        } else {
+          video.pause();
+          container.classList.add('paused');
+          if (playIcon) playIcon.classList.remove('hidden');
+          if (pauseIcon) pauseIcon.classList.add('hidden');
+        }
+      }
+
+      if (playPauseBtn) {
+        playPauseBtn.addEventListener('click', togglePlay);
+      }
+
+      // Click/tap on video to toggle play/pause
+      video.addEventListener('click', function(e) {
+        e.preventDefault();
+        togglePlay(e);
+      });
+
+      // Update time and progress
+      video.addEventListener('timeupdate', function() {
+        const progress = (video.currentTime / video.duration) * 100;
+        if (progressBar) progressBar.style.width = progress + '%';
+        if (timeDisplay) {
+          timeDisplay.textContent = formatTime(video.currentTime) + ' / ' + formatTime(video.duration);
+        }
+      });
+
+      video.addEventListener('loadedmetadata', function() {
+        if (timeDisplay) {
+          timeDisplay.textContent = formatTime(0) + ' / ' + formatTime(video.duration);
+        }
+      });
+
+      // Seek on progress bar click
+      if (progressContainer) {
+        progressContainer.addEventListener('click', function(e) {
+          const rect = progressContainer.getBoundingClientRect();
+          const percent = (e.clientX - rect.left) / rect.width;
+          video.currentTime = Math.max(0, Math.min(1, percent)) * video.duration;
+        });
+      }
+
+      // Fullscreen toggle
+      function toggleFullscreen(e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        if (container.classList.contains('fullscreen')) {
+          container.classList.remove('fullscreen');
+          document.body.style.overflow = '';
+          // Show maximize, hide minimize
+          if (maximizeIcon) maximizeIcon.classList.remove('hidden');
+          if (minimizeIcon) minimizeIcon.classList.add('hidden');
+          if (document.fullscreenElement) {
+            document.exitFullscreen().catch(function() {});
+          }
+        } else {
+          container.classList.add('fullscreen');
+          document.body.style.overflow = 'hidden';
+          // Show minimize, hide maximize
+          if (maximizeIcon) maximizeIcon.classList.add('hidden');
+          if (minimizeIcon) minimizeIcon.classList.remove('hidden');
+          if (container.requestFullscreen) {
+            container.requestFullscreen().catch(function() {
+              // CSS fallback is already applied
+            });
+          }
+        }
+      }
+
+      if (fullscreenBtn) {
+        fullscreenBtn.addEventListener('click', toggleFullscreen);
+      }
+
+      // ESC key to exit fullscreen
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && container.classList.contains('fullscreen')) {
+          container.classList.remove('fullscreen');
+          document.body.style.overflow = '';
+          if (maximizeIcon) maximizeIcon.classList.remove('hidden');
+          if (minimizeIcon) minimizeIcon.classList.add('hidden');
+        }
+      });
+
+      // Sync with native fullscreen exit
+      document.addEventListener('fullscreenchange', function() {
+        if (!document.fullscreenElement && container.classList.contains('fullscreen')) {
+          container.classList.remove('fullscreen');
+          document.body.style.overflow = '';
+          if (maximizeIcon) maximizeIcon.classList.remove('hidden');
+          if (minimizeIcon) minimizeIcon.classList.add('hidden');
+        }
+      });
+    }
+
+    // Run when DOM is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initDemoVideo);
+    } else {
+      initDemoVideo();
+    }
+
+    // Also handle Astro page transitions
+    document.addEventListener('astro:page-load', initDemoVideo);
+  })();
+</script>
